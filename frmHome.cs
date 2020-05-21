@@ -25,7 +25,7 @@ namespace QlBida
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Ban co thuc su muon thoat ?","Thoat ung dung",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("Bạn có thực sự muốn thoát ?","Thoát ứng dụng",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 frmLogin frm = new frmLogin();
@@ -66,13 +66,7 @@ namespace QlBida
 
         private void frmHome_Load(object sender, EventArgs e)
         {
-            frmHomePage frm = new frmHomePage();
-            LoadMdiForm(frm);
-        }
-
-        private void btnLogo_Click(object sender, EventArgs e)
-        {
-            frmHomePage frm = new frmHomePage();
+            frmTable frm = new frmTable();
             LoadMdiForm(frm);
         }
 
@@ -80,6 +74,7 @@ namespace QlBida
         {
             frm.MdiParent = this;
             frm.StartPosition = FormStartPosition.Manual;
+            frm.FormBorderStyle = FormBorderStyle.None;
             frm.Dock = DockStyle.Fill;
             if (this.ActiveMdiChild != null)
             {
@@ -92,7 +87,6 @@ namespace QlBida
             }
             frm.Show();
         }
-
 
     }
 }
