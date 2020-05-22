@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.flpTableList = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTableName = new System.Windows.Forms.TextBox();
             this.txtTablePrice = new System.Windows.Forms.TextBox();
@@ -38,18 +39,16 @@
             this.txtSurcharge = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnAddService = new System.Windows.Forms.Button();
-            this.cbxServiceCategory = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvSerive = new System.Windows.Forms.DataGridView();
             this.txtTiming = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.flpTableList = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnChangeTable = new System.Windows.Forms.Button();
+            this.btnAddService = new System.Windows.Forms.Button();
+            this.btnNewTable = new System.Windows.Forms.Button();
+            this.btnUpdateTable = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSerive)).BeginInit();
             this.SuspendLayout();
@@ -59,10 +58,19 @@
             this.groupBox1.Controls.Add(this.flpTableList);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(513, 462);
+            this.groupBox1.Size = new System.Drawing.Size(513, 429);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách bàn";
+            // 
+            // flpTableList
+            // 
+            this.flpTableList.AutoScroll = true;
+            this.flpTableList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpTableList.Location = new System.Drawing.Point(3, 16);
+            this.flpTableList.Name = "flpTableList";
+            this.flpTableList.Size = new System.Drawing.Size(507, 410);
+            this.flpTableList.TabIndex = 0;
             // 
             // label1
             // 
@@ -100,18 +108,18 @@
             // 
             // btnStartTime
             // 
-            this.btnStartTime.Location = new System.Drawing.Point(554, 170);
+            this.btnStartTime.Location = new System.Drawing.Point(534, 170);
             this.btnStartTime.Name = "btnStartTime";
-            this.btnStartTime.Size = new System.Drawing.Size(90, 29);
+            this.btnStartTime.Size = new System.Drawing.Size(80, 29);
             this.btnStartTime.TabIndex = 5;
             this.btnStartTime.Text = "Tính giờ";
             this.btnStartTime.UseVisualStyleBackColor = true;
             // 
             // btnEndTime
             // 
-            this.btnEndTime.Location = new System.Drawing.Point(684, 170);
+            this.btnEndTime.Location = new System.Drawing.Point(719, 170);
             this.btnEndTime.Name = "btnEndTime";
-            this.btnEndTime.Size = new System.Drawing.Size(89, 29);
+            this.btnEndTime.Size = new System.Drawing.Size(80, 29);
             this.btnEndTime.TabIndex = 6;
             this.btnEndTime.Text = "Kết thúc";
             this.btnEndTime.UseVisualStyleBackColor = true;
@@ -134,59 +142,21 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Location = new System.Drawing.Point(531, 205);
+            this.groupBox2.Location = new System.Drawing.Point(531, 261);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(280, 269);
+            this.groupBox2.Size = new System.Drawing.Size(280, 213);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Dịch vụ";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnAddService);
-            this.panel2.Controls.Add(this.cbxServiceCategory);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 16);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(274, 45);
-            this.panel2.TabIndex = 19;
-            // 
-            // btnAddService
-            // 
-            this.btnAddService.Location = new System.Drawing.Point(190, 14);
-            this.btnAddService.Name = "btnAddService";
-            this.btnAddService.Size = new System.Drawing.Size(75, 23);
-            this.btnAddService.TabIndex = 20;
-            this.btnAddService.Text = "Thêm DV";
-            this.btnAddService.UseVisualStyleBackColor = true;
-            // 
-            // cbxServiceCategory
-            // 
-            this.cbxServiceCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxServiceCategory.FormattingEnabled = true;
-            this.cbxServiceCategory.Location = new System.Drawing.Point(78, 16);
-            this.cbxServiceCategory.Name = "cbxServiceCategory";
-            this.cbxServiceCategory.Size = new System.Drawing.Size(98, 21);
-            this.cbxServiceCategory.TabIndex = 19;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Loại dịch vụ";
+            this.groupBox2.Text = "Dịch vụ đã gọi";
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.dgvSerive);
-            this.panel1.Location = new System.Drawing.Point(3, 67);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(274, 199);
+            this.panel1.Size = new System.Drawing.Size(274, 194);
             this.panel1.TabIndex = 18;
             // 
             // dgvSerive
@@ -195,7 +165,7 @@
             this.dgvSerive.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSerive.Location = new System.Drawing.Point(0, 0);
             this.dgvSerive.Name = "dgvSerive";
-            this.dgvSerive.Size = new System.Drawing.Size(274, 199);
+            this.dgvSerive.Size = new System.Drawing.Size(274, 194);
             this.dgvSerive.TabIndex = 15;
             // 
             // txtTiming
@@ -215,20 +185,54 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Thời gian chơi";
             // 
-            // flpTableList
+            // btnChangeTable
             // 
-            this.flpTableList.AutoScroll = true;
-            this.flpTableList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpTableList.Location = new System.Drawing.Point(3, 16);
-            this.flpTableList.Name = "flpTableList";
-            this.flpTableList.Size = new System.Drawing.Size(507, 443);
-            this.flpTableList.TabIndex = 0;
+            this.btnChangeTable.Location = new System.Drawing.Point(630, 170);
+            this.btnChangeTable.Name = "btnChangeTable";
+            this.btnChangeTable.Size = new System.Drawing.Size(80, 29);
+            this.btnChangeTable.TabIndex = 13;
+            this.btnChangeTable.Text = "Chuyển bàn";
+            this.btnChangeTable.UseVisualStyleBackColor = true;
+            // 
+            // btnAddService
+            // 
+            this.btnAddService.Location = new System.Drawing.Point(534, 213);
+            this.btnAddService.Name = "btnAddService";
+            this.btnAddService.Size = new System.Drawing.Size(80, 29);
+            this.btnAddService.TabIndex = 14;
+            this.btnAddService.Text = "Thêm dịch vụ";
+            this.btnAddService.UseVisualStyleBackColor = true;
+            this.btnAddService.Click += new System.EventHandler(this.btnAddService_Click);
+            // 
+            // btnNewTable
+            // 
+            this.btnNewTable.Location = new System.Drawing.Point(12, 447);
+            this.btnNewTable.Name = "btnNewTable";
+            this.btnNewTable.Size = new System.Drawing.Size(80, 29);
+            this.btnNewTable.TabIndex = 15;
+            this.btnNewTable.Text = "Thêm bàn ";
+            this.btnNewTable.UseVisualStyleBackColor = true;
+            this.btnNewTable.Click += new System.EventHandler(this.btnNewTable_Click);
+            // 
+            // btnUpdateTable
+            // 
+            this.btnUpdateTable.Location = new System.Drawing.Point(109, 447);
+            this.btnUpdateTable.Name = "btnUpdateTable";
+            this.btnUpdateTable.Size = new System.Drawing.Size(80, 29);
+            this.btnUpdateTable.TabIndex = 16;
+            this.btnUpdateTable.Text = "Sửa thông tin";
+            this.btnUpdateTable.UseVisualStyleBackColor = true;
+            this.btnUpdateTable.Click += new System.EventHandler(this.btnUpdateTable_Click);
             // 
             // frmTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 486);
+            this.Controls.Add(this.btnUpdateTable);
+            this.Controls.Add(this.btnNewTable);
+            this.Controls.Add(this.btnAddService);
+            this.Controls.Add(this.btnChangeTable);
             this.Controls.Add(this.txtTiming);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox2);
@@ -247,8 +251,6 @@
             this.Load += new System.EventHandler(this.frmTable_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSerive)).EndInit();
             this.ResumeLayout(false);
@@ -270,12 +272,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtTiming;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnAddService;
-        private System.Windows.Forms.ComboBox cbxServiceCategory;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvSerive;
         private System.Windows.Forms.FlowLayoutPanel flpTableList;
+        private System.Windows.Forms.Button btnChangeTable;
+        private System.Windows.Forms.Button btnAddService;
+        private System.Windows.Forms.Button btnNewTable;
+        private System.Windows.Forms.Button btnUpdateTable;
     }
 }

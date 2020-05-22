@@ -23,10 +23,13 @@ C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.csprojResolveAssemblyRefer
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmAccount.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmCustomer.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmHome.resources
-C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmHomePage.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmLogin.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmReport.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmService.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmTable.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.Properties.Resources.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.csproj.GenerateResource.Cache
+C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmAddService.resources
+C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmOrderDetails.resources
+C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmNewTable.resources
+C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmUpdateTable.resources

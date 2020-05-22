@@ -24,14 +24,24 @@ namespace QlBida
         {
             LoadTable();
         }
+
         private void LoadTable()
         {
-
-            foreach (var table in bida.BidaTables)
+            var lstTable = from t in bida.BidaTables
+                           join c in bida.TableCategories
+                           on t.TableCatID equals c.TableCatId
+                           select new 
+                           {
+                               Id = t.TableId,
+                               Name = t.TableName,
+                               CatName = c.TableCatName,
+                               Status = t.TableStatus
+                           };
+            foreach (var table in lstTable)
             {
                 string status;
                 Button btn = new Button() { Width = 120, Height = 120 };
-                if (table.TableStatus == 1)
+                if (table.Status == 1)
                 {
                     status = "Trống";
                 }
@@ -48,10 +58,31 @@ namespace QlBida
                         btn.BackColor = Color.OrangeRed;
                         break;
                 }
-                btn.Text = table.TableName + Environment.NewLine + Environment.NewLine + status;
+                btn.Text = table.Name + Environment.NewLine + Environment.NewLine +table.CatName+ Environment.NewLine + Environment.NewLine + status;
                 flpTableList.Controls.Add(btn);
             }
 
+        }
+
+        private void btnAddService_Click(object sender, EventArgs e)
+        {
+            frmAddService frm = new frmAddService();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show();
+        }
+
+        private void btnNewTable_Click(object sender, EventArgs e)
+        {
+            frmNewTable frm = new frmNewTable();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show();
+        }
+
+        private void btnUpdateTable_Click(object sender, EventArgs e)
+        {
+            frmUpdateTable frm = new frmUpdateTable();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show();
         }
     }
 }

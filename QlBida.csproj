@@ -57,6 +57,12 @@
     <Compile Include="frmAccount.Designer.cs">
       <DependentUpon>frmAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddService.Designer.cs">
+      <DependentUpon>frmAddService.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,18 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewTable.Designer.cs">
+      <DependentUpon>frmNewTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrderDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrderDetails.Designer.cs">
+      <DependentUpon>frmOrderDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="frmReport.cs">
       <SubType>Form</SubType>
@@ -93,10 +111,19 @@
     <Compile Include="frmTable.Designer.cs">
       <DependentUpon>frmTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUpdateTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateTable.Designer.cs">
+      <DependentUpon>frmUpdateTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAccount.resx">
       <DependentUpon>frmAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddService.resx">
+      <DependentUpon>frmAddService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomer.resx">
       <DependentUpon>frmCustomer.cs</DependentUpon>
@@ -107,6 +134,12 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmNewTable.resx">
+      <DependentUpon>frmNewTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrderDetails.resx">
+      <DependentUpon>frmOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReport.resx">
       <DependentUpon>frmReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTable.resx">
       <DependentUpon>frmTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateTable.resx">
+      <DependentUpon>frmUpdateTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

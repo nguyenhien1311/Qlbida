@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,10 +41,9 @@
             this.btnNewService = new System.Windows.Forms.Button();
             this.btnUpdateService = new System.Windows.Forms.Button();
             this.btnSaveChange = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -55,6 +55,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Bảng dịch vụ";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(457, 443);
+            this.dataGridView1.TabIndex = 0;
             // 
             // label1
             // 
@@ -126,7 +135,7 @@
             // 
             this.btnNewService.Location = new System.Drawing.Point(511, 283);
             this.btnNewService.Name = "btnNewService";
-            this.btnNewService.Size = new System.Drawing.Size(82, 23);
+            this.btnNewService.Size = new System.Drawing.Size(83, 23);
             this.btnNewService.TabIndex = 9;
             this.btnNewService.Text = "Thêm DV";
             this.btnNewService.UseVisualStyleBackColor = true;
@@ -144,19 +153,10 @@
             // 
             this.btnSaveChange.Location = new System.Drawing.Point(614, 283);
             this.btnSaveChange.Name = "btnSaveChange";
-            this.btnSaveChange.Size = new System.Drawing.Size(88, 23);
+            this.btnSaveChange.Size = new System.Drawing.Size(83, 23);
             this.btnSaveChange.TabIndex = 11;
             this.btnSaveChange.Text = "Lưu";
             this.btnSaveChange.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(457, 443);
-            this.dataGridView1.TabIndex = 0;
             // 
             // frmService
             // 
@@ -179,8 +179,8 @@
             this.Name = "frmService";
             this.Text = "frmService";
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -185,6 +185,7 @@
             // panel2
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel2.Location = new System.Drawing.Point(30, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(129, 129);
