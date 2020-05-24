@@ -16,5 +16,11 @@ namespace QlBida
         {
             InitializeComponent();
         }
+
+        private void btnOrderDetails_Click(object sender, EventArgs e)
+        {
+            frmOrderDetails frm = new frmOrderDetails();
+            frm.Show();
+        }
     }
 }

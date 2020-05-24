@@ -33,3 +33,8 @@ C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmAddService.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmOrderDetails.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmNewTable.resources
 C:\Users\ADMIN\Desktop\Qlbida\Qlbida\obj\Debug\QlBida.frmUpdateTable.resources
+C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmAddService.resources
+C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmNewTable.resources
+C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmOrderDetails.resources
+C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmUpdateTable.resources
+C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmShowBill.resources

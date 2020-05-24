@@ -35,7 +35,11 @@ INSERT INTO BidaTable VALUES
 (N'Bàn số 9',3,134000,1),
 (N'Bàn số 10',3,134000,1),
 (N'Bàn số 11',3,134000,1),
-(N'Bàn số 12',3,134000,1)
+(N'Bàn số 12',3,134000,1),
+(N'Bàn số 13',3,134000,1),
+(N'Bàn số 14',3,134000,1),
+(N'Bàn số 15',3,134000,1),
+(N'Bàn số 16',3,134000,1)
 GO
 CREATE TABLE Customer
 (
@@ -63,7 +67,8 @@ CREATE TABLE ServiceCategory
 go
 INSERT INTO ServiceCategory VALUES 
 (N'Đồ uống'),
-(N'Đồ ăn')
+(N'Đồ ăn'),
+(N'Thuốc lá')
 GO
 CREATE TABLE TableService
 (
@@ -88,7 +93,12 @@ INSERT INTO TableService VALUES
 (N'Bánh mì trứng',2,12000,30),
 (N'Bánh mì xúc xích',2,12000,30),
 (N'Bánh mì bò khô',2,12000,30),
-(N'Gói hạt hướng dương',2,5000,30)
+(N'Gói hạt hướng dương',2,5000,30),
+(N'Thuốc lá thăng long',2,10000,30),
+(N'Thuốc lá 555',2,30000,30),
+(N'Thuốc lá Marlboro',2,22000,30),
+(N'Thuốc lá Mond Mond Gold',2,30000,30),
+(N'Thuốc lá Mond Mond Black',2,20000,30)
 GO
 CREATE TABLE  OrderTable
 (

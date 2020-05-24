@@ -65,6 +65,7 @@
             // 
             // flpTableList
             // 
+            this.flpTableList.AllowDrop = true;
             this.flpTableList.AutoScroll = true;
             this.flpTableList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpTableList.Location = new System.Drawing.Point(3, 16);
@@ -123,6 +124,7 @@
             this.btnEndTime.TabIndex = 6;
             this.btnEndTime.Text = "Kết thúc";
             this.btnEndTime.UseVisualStyleBackColor = true;
+            this.btnEndTime.Click += new System.EventHandler(this.btnEndTime_Click);
             // 
             // txtSurcharge
             // 

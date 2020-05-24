@@ -41,6 +41,7 @@ namespace QlBida
             {
                 string status;
                 Button btn = new Button() { Width = 120, Height = 120 };
+                btn.Tag = table;
                 if (table.Status == 1)
                 {
                     status = "Trống";
@@ -82,6 +83,12 @@ namespace QlBida
         {
             frmUpdateTable frm = new frmUpdateTable();
             frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show();
+        }
+
+        private void btnEndTime_Click(object sender, EventArgs e)
+        {
+            frmShowBill frm = new frmShowBill();
             frm.Show();
         }
     }

@@ -31,7 +31,7 @@
             this.cbxTableCat = new System.Windows.Forms.ComboBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtNewTableName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -56,6 +56,7 @@
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Hủy";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnClear
             // 
@@ -66,14 +67,14 @@
             this.btnClear.Text = "Làm mới";
             this.btnClear.UseVisualStyleBackColor = true;
             // 
-            // btnAdd
+            // btnSave
             // 
-            this.btnAdd.Location = new System.Drawing.Point(43, 197);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 15;
-            this.btnAdd.Text = "Thêm ";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(43, 197);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 15;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // txtPrice
             // 
@@ -124,7 +125,7 @@
             this.Controls.Add(this.cbxTableCat);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtNewTableName);
             this.Controls.Add(this.label3);
@@ -142,7 +143,7 @@
         private System.Windows.Forms.ComboBox cbxTableCat;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtNewTableName;
         private System.Windows.Forms.Label label3;

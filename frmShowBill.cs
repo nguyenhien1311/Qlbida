@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace QlBida
 {
-    public partial class frmUpdateTable : Form
+    public partial class frmShowBill : Form
     {
-        public frmUpdateTable()
+        public frmShowBill()
         {
             InitializeComponent();
+        }
+
+        private void btnPayBill_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

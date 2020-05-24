@@ -142,7 +142,7 @@
             // 
             // btnUpdateService
             // 
-            this.btnUpdateService.Location = new System.Drawing.Point(728, 283);
+            this.btnUpdateService.Location = new System.Drawing.Point(718, 283);
             this.btnUpdateService.Name = "btnUpdateService";
             this.btnUpdateService.Size = new System.Drawing.Size(83, 23);
             this.btnUpdateService.TabIndex = 10;

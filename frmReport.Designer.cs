@@ -93,6 +93,7 @@
             this.btnOrderDetails.TabIndex = 4;
             this.btnOrderDetails.Text = "Chi tiết hóa đơn";
             this.btnOrderDetails.UseVisualStyleBackColor = true;
+            this.btnOrderDetails.Click += new System.EventHandler(this.btnOrderDetails_Click);
             // 
             // btnExportReport
             // 
