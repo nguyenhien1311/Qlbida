@@ -91,5 +91,11 @@ namespace QlBida
             frmChoosePay frm = new frmChoosePay();
             frm.Show();
         }
+
+        private void btnStartTime_Click(object sender, EventArgs e)
+        {
+
+            LoadTable();
+        }
     }
 }

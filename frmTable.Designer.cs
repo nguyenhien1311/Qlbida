@@ -115,6 +115,7 @@
             this.btnStartTime.TabIndex = 5;
             this.btnStartTime.Text = "Tính giờ";
             this.btnStartTime.UseVisualStyleBackColor = true;
+            this.btnStartTime.Click += new System.EventHandler(this.btnStartTime_Click);
             // 
             // btnEndTime
             // 
