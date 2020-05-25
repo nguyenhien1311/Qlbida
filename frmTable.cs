@@ -88,7 +88,7 @@ namespace QlBida
 
         private void btnEndTime_Click(object sender, EventArgs e)
         {
-            frmShowBill frm = new frmShowBill();
+            frmChoosePay frm = new frmChoosePay();
             frm.Show();
         }
     }

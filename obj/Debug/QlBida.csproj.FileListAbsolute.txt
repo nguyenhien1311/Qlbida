@@ -38,3 +38,6 @@ C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmNewTable.resources
 C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmOrderDetails.resources
 C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmUpdateTable.resources
 C:\Users\admin\Source\Repos\QlBida\obj\Debug\QlBida.frmShowBill.resources
+C:\Users\ADMIN\Desktop\QLbida\Qlbida\obj\Debug\QlBida.frmShowBill.resources
+C:\Users\ADMIN\Desktop\QLbida\Qlbida\obj\Debug\QlBida.frmChoosePay.resources
+C:\Users\ADMIN\Desktop\QLbida\Qlbida\obj\Debug\QlBida.frmFindCustomer.resources

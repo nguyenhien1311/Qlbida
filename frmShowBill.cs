@@ -12,6 +12,13 @@ namespace QlBida
 {
     public partial class frmShowBill : Form
     {
+        Customer cus;
+        public frmShowBill(Customer customer)
+        {
+            cus = customer;
+            InitializeComponent();
+        }
+
         public frmShowBill()
         {
             InitializeComponent();
@@ -19,6 +26,7 @@ namespace QlBida
 
         private void btnPayBill_Click(object sender, EventArgs e)
         {
+            lblTableName.Text = cus.CusName;
             this.Close();
         }
 

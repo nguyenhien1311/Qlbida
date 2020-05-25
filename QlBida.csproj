@@ -63,11 +63,23 @@
     <Compile Include="frmAddService.Designer.cs">
       <DependentUpon>frmAddService.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChoosePay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChoosePay.Designer.cs">
+      <DependentUpon>frmChoosePay.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCustomer.Designer.cs">
       <DependentUpon>frmCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFindCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFindCustomer.Designer.cs">
+      <DependentUpon>frmFindCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="frmHome.cs">
       <SubType>Form</SubType>
@@ -131,8 +143,14 @@
     <EmbeddedResource Include="frmAddService.resx">
       <DependentUpon>frmAddService.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmChoosePay.resx">
+      <DependentUpon>frmChoosePay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCustomer.resx">
       <DependentUpon>frmCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFindCustomer.resx">
+      <DependentUpon>frmFindCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
