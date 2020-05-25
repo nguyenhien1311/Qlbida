@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flpTableList = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             this.btnAddService = new System.Windows.Forms.Button();
             this.btnNewTable = new System.Windows.Forms.Button();
             this.btnUpdateTable = new System.Windows.Forms.Button();
+            this.countingPlayTime = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -227,6 +229,11 @@
             this.btnUpdateTable.UseVisualStyleBackColor = true;
             this.btnUpdateTable.Click += new System.EventHandler(this.btnUpdateTable_Click);
             // 
+            // countingPlayTime
+            // 
+            this.countingPlayTime.Interval = 60000;
+            this.countingPlayTime.Tick += new System.EventHandler(this.countingPlayTime_Tick);
+            // 
             // frmTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,5 +289,6 @@
         private System.Windows.Forms.Button btnAddService;
         private System.Windows.Forms.Button btnNewTable;
         private System.Windows.Forms.Button btnUpdateTable;
+        private System.Windows.Forms.Timer countingPlayTime;
     }
 }

@@ -24,28 +24,30 @@ namespace QlBida
             string user = txtUsername.Text;
             string pass = txtPassword.Text;
             BidaDataContext bida = new BidaDataContext();
-                var account = bida.Accounts.SingleOrDefault(x=>x.UserName.Equals(user));
-                if (account!=null)
+            var account = bida.Accounts.SingleOrDefault(x => x.UserName.Equals(user));
+            if (account != null)
+            {
+                lblUserError.Text = "";
+                if (account.Password.Equals(pass))
                 {
-                    lblUserError.Text = "";
-                    if (account.Password.Equals(pass))
-                    {
-                        lblPassEreor.Text = "";
-                        frmHome frm = new frmHome(account);
-                        frm.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        lblPassEreor.Text = "Mật khẩu không đúng";
-                        txtPassword.Focus();
-                    }
+                    lblPassEreor.Text = "";
+                    frmHome frm = new frmHome(account);
+                    frm.Show();
+                    this.Hide();
                 }
                 else
                 {
-                    lblUserError.Text = "Tên tài khoản không đúng";
-                    txtUsername.Focus();
+                    lblPassEreor.Text = "Mật khẩu không đúng";
+                    txtPassword.Text = "";
+                    txtPassword.Focus();
                 }
+            }
+            else
+            {
+                lblUserError.Text = "Tên tài khoản không đúng";
+                txtUsername.Focus();
+                txtPassword.Text = "";
+            }
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)

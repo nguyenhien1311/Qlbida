@@ -29,10 +29,15 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.btnPay = new System.Windows.Forms.Button();
+            this.CusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CusAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CusPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CusLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +51,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách hội viên";
+            // 
+            // dgvCusList
+            // 
+            this.dgvCusList.AllowUserToAddRows = false;
+            this.dgvCusList.AllowUserToDeleteRows = false;
+            this.dgvCusList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCusList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CusId,
+            this.CusName,
+            this.CusAddress,
+            this.CusPhone,
+            this.CusLevel});
+            this.dgvCusList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCusList.Location = new System.Drawing.Point(3, 16);
+            this.dgvCusList.MultiSelect = false;
+            this.dgvCusList.Name = "dgvCusList";
+            this.dgvCusList.ReadOnly = true;
+            this.dgvCusList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCusList.Size = new System.Drawing.Size(587, 269);
+            this.dgvCusList.TabIndex = 0;
             // 
             // label1
             // 
@@ -63,16 +88,6 @@
             this.textBox1.Size = new System.Drawing.Size(154, 20);
             this.textBox1.TabIndex = 2;
             // 
-            // dgvCusList
-            // 
-            this.dgvCusList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCusList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCusList.Location = new System.Drawing.Point(3, 16);
-            this.dgvCusList.Name = "dgvCusList";
-            this.dgvCusList.Size = new System.Drawing.Size(587, 269);
-            this.dgvCusList.TabIndex = 0;
-            this.dgvCusList.Click += new System.EventHandler(this.dgvCusList_Click);
-            // 
             // btnPay
             // 
             this.btnPay.Location = new System.Drawing.Point(457, 347);
@@ -82,6 +97,44 @@
             this.btnPay.Text = "Tiến hành thanh toán";
             this.btnPay.UseVisualStyleBackColor = true;
             this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
+            // 
+            // CusId
+            // 
+            this.CusId.DataPropertyName = "CusId";
+            this.CusId.HeaderText = "Mã HV";
+            this.CusId.Name = "CusId";
+            this.CusId.ReadOnly = true;
+            // 
+            // CusName
+            // 
+            this.CusName.DataPropertyName = "CusName";
+            this.CusName.HeaderText = "Họ tên";
+            this.CusName.Name = "CusName";
+            this.CusName.ReadOnly = true;
+            this.CusName.Width = 150;
+            // 
+            // CusAddress
+            // 
+            this.CusAddress.DataPropertyName = "CusAddress";
+            this.CusAddress.HeaderText = "Địa chỉ";
+            this.CusAddress.Name = "CusAddress";
+            this.CusAddress.ReadOnly = true;
+            // 
+            // CusPhone
+            // 
+            this.CusPhone.DataPropertyName = "CusPhone";
+            this.CusPhone.HeaderText = "SĐT";
+            this.CusPhone.Name = "CusPhone";
+            this.CusPhone.ReadOnly = true;
+            this.CusPhone.Width = 104;
+            // 
+            // CusLevel
+            // 
+            this.CusLevel.DataPropertyName = "CusLevel";
+            this.CusLevel.HeaderText = "Cấp độ";
+            this.CusLevel.Name = "CusLevel";
+            this.CusLevel.ReadOnly = true;
+            this.CusLevel.Width = 90;
             // 
             // frmFindCustomer
             // 
@@ -95,6 +148,7 @@
             this.Name = "frmFindCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tìm hội viên";
+            this.Load += new System.EventHandler(this.frmFindCustomer_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).EndInit();
             this.ResumeLayout(false);
@@ -109,5 +163,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnPay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusLevel;
     }
 }

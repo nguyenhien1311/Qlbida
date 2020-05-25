@@ -12,24 +12,30 @@ namespace QlBida
 {
     public partial class frmFindCustomer : Form
     {
-
-        Customer cus;
-
+        private BidaDataContext db;
         public frmFindCustomer()
         {
             InitializeComponent();
+            db = new BidaDataContext();
         }
 
         private void btnPay_Click(object sender, EventArgs e)
         {
 
-            frmShowBill frm = new frmShowBill(cus);
+            frmShowBill frm = new frmShowBill();
             frm.Show();
             this.Close();
         }
 
-        private void dgvCusList_Click(object sender, EventArgs e)
+        private void frmFindCustomer_Load(object sender, EventArgs e)
         {
+            LoadCustomer();
+        }
+
+        private void LoadCustomer() {
+            var data = from c in db.Customers
+                       select c;
+            dgvCusList.DataSource = data;
         }
     }
 }

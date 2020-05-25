@@ -94,11 +94,11 @@ INSERT INTO TableService VALUES
 (N'Bánh mì xúc xích',2,12000,30),
 (N'Bánh mì bò khô',2,12000,30),
 (N'Gói hạt hướng dương',2,5000,30),
-(N'Thuốc lá thăng long',2,10000,30),
-(N'Thuốc lá 555',2,30000,30),
-(N'Thuốc lá Marlboro',2,22000,30),
-(N'Thuốc lá Mond Mond Gold',2,30000,30),
-(N'Thuốc lá Mond Mond Black',2,20000,30)
+(N'Thuốc lá thăng long',3,10000,30),
+(N'Thuốc lá 555',3,30000,30),
+(N'Thuốc lá Marlboro',3,22000,30),
+(N'Thuốc lá Mond Mond Gold',3,30000,30),
+(N'Thuốc lá Mond Mond Black',3,20000,30)
 GO
 CREATE TABLE  OrderTable
 (
