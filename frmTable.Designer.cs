@@ -231,7 +231,7 @@
             // 
             // countingPlayTime
             // 
-            this.countingPlayTime.Interval = 60000;
+            this.countingPlayTime.Interval = 1000;
             this.countingPlayTime.Tick += new System.EventHandler(this.countingPlayTime_Tick);
             // 
             // frmTable

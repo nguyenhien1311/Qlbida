@@ -1306,6 +1306,8 @@ namespace QlBida
 		
 		private System.Nullable<double> _Price;
 		
+		private System.Nullable<int> _PlayTime;
+		
 		private System.Nullable<int> _TableStatus;
 		
 		private EntitySet<OrderTable> _OrderTables;
@@ -1324,6 +1326,8 @@ namespace QlBida
     partial void OnTableCatIDChanged();
     partial void OnPriceChanging(System.Nullable<double> value);
     partial void OnPriceChanged();
+    partial void OnPlayTimeChanging(System.Nullable<int> value);
+    partial void OnPlayTimeChanged();
     partial void OnTableStatusChanging(System.Nullable<int> value);
     partial void OnTableStatusChanged();
     #endregion
@@ -1415,6 +1419,26 @@ namespace QlBida
 					this._Price = value;
 					this.SendPropertyChanged("Price");
 					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlayTime", DbType="Int")]
+		public System.Nullable<int> PlayTime
+		{
+			get
+			{
+				return this._PlayTime;
+			}
+			set
+			{
+				if ((this._PlayTime != value))
+				{
+					this.OnPlayTimeChanging(value);
+					this.SendPropertyChanging();
+					this._PlayTime = value;
+					this.SendPropertyChanged("PlayTime");
+					this.OnPlayTimeChanged();
 				}
 			}
 		}

@@ -14,6 +14,9 @@ namespace QlBida
     {
 
         BidaDataContext bida;
+        BidaTable tb;
+        DateTime startTime, endTime;
+
 
         public frmTable()
         {
@@ -36,7 +39,7 @@ namespace QlBida
             var lstTable = from t in bida.BidaTables
                            join c in bida.TableCategories
                            on t.TableCatID equals c.TableCatId
-                           select new 
+                           select new
                            {
                                Id = t.TableId,
                                Name = t.TableName,
@@ -45,10 +48,11 @@ namespace QlBida
                            };
             foreach (var table in lstTable)
             {
-                BidaTable bidaTable = bida.BidaTables.SingleOrDefault(x=>x.TableId == table.Id);
+                BidaTable bidaTable = bida.BidaTables.SingleOrDefault(x => x.TableId == table.Id);
                 string status;
                 Button btn = new Button() { Width = 120, Height = 120 };
                 btn.Click += btn_Click;
+                btn.Leave += btn_Leave;
                 btn.Tag = bidaTable;
                 if (table.Status == 1)
                 {
@@ -67,28 +71,43 @@ namespace QlBida
                         btn.BackColor = Color.OrangeRed;
                         break;
                 }
-                btn.Text = table.Name + Environment.NewLine + Environment.NewLine +table.CatName+ Environment.NewLine + Environment.NewLine + status;
+                btn.Text = table.Name + Environment.NewLine + Environment.NewLine + table.CatName + Environment.NewLine + Environment.NewLine + status;
                 flpTableList.Controls.Add(btn);
             }
 
         }
 
-        void TableDetails(int id) { 
-            
+        BidaTable TableDetails(int id)
+        {
+            tb = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
+            txtTableName.Text = tb.TableName;
+            txtTablePrice.Text = tb.Price.ToString();
+            if (tb.PlayTime > 0)
+            {
+                btnStartTime.Enabled = false;
+            }
+            return tb;
         }
 
-        void btn_Click(object sender, EventArgs e) {
+        void btn_Click(object sender, EventArgs e)
+        {
             Button btn = sender as Button;
+            btn.BackColor = Color.RoyalBlue;
             var table = btn.Tag as BidaTable;
             int id = table.TableId;
-            txtTableName.Text = table.TableName;
-            txtTablePrice.Text = table.Price.ToString();
+            txtTiming.Text = TimeSpan.FromSeconds(0).ToString();
             btnUpdateTable.Enabled = true;
             btnStartTime.Enabled = true;
             btnEndTime.Enabled = true;
             btnAddService.Enabled = true;
             TableDetails(id);
-        } 
+        }
+
+        void btn_Leave(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.BackColor = Color.LimeGreen;
+        }
 
         private void btnAddService_Click(object sender, EventArgs e)
         {
@@ -114,22 +133,26 @@ namespace QlBida
         private void btnEndTime_Click(object sender, EventArgs e)
         {
             countingPlayTime.Stop();
+            endTime = DateTime.Now;
+            MessageBox.Show(startTime.ToString() + Environment.NewLine + endTime.ToString());
             frmChoosePay frm = new frmChoosePay();
             frm.Show();
         }
 
         private void btnStartTime_Click(object sender, EventArgs e)
         {
-            countingPlayTime.Start();
-            LoadTable();
+            startTime = DateTime.Now;
+            if (tb.PlayTime == 0)
+            {
+                countingPlayTime.Start();
+            }
         }
 
-        private int minute = 0;
 
         private void countingPlayTime_Tick(object sender, EventArgs e)
         {
-            minute++;
-            txtTiming.Text = minute.ToString();
+            tb.PlayTime++;
+            txtTiming.Text = TimeSpan.FromSeconds((double)tb.PlayTime).ToString();
         }
     }
 }

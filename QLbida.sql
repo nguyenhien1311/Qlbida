@@ -20,26 +20,27 @@ CREATE TABLE BidaTable
 	TableName nvarchar(50),
 	TableCatID int foreign key references TableCategory(TableCatId),
 	Price float,
+	PlayTime int default(0),
 	TableStatus int default(1),
 )
 go
 INSERT INTO BidaTable VALUES 
-(N'Bàn số 1',1,80000,1),
-(N'Bàn số 2',1,80000,1),
-(N'Bàn số 3',1,80000,1),	
-(N'Bàn số 4',1,80000,1),
-(N'Bàn số 5',2,94000,1),
-(N'Bàn số 6',2,94000,1),
-(N'Bàn số 7',2,94000,1),
-(N'Bàn số 8',2,94000,1),
-(N'Bàn số 9',3,134000,1),
-(N'Bàn số 10',3,134000,1),
-(N'Bàn số 11',3,134000,1),
-(N'Bàn số 12',3,134000,1),
-(N'Bàn số 13',3,134000,1),
-(N'Bàn số 14',3,134000,1),
-(N'Bàn số 15',3,134000,1),
-(N'Bàn số 16',3,134000,1)
+(N'Bàn số 1',1,80000,0,1),
+(N'Bàn số 2',1,80000,0,1),
+(N'Bàn số 3',1,80000,0,1),	
+(N'Bàn số 4',1,80000,0,1),
+(N'Bàn số 5',2,94000,0,1),
+(N'Bàn số 6',2,94000,0,1),
+(N'Bàn số 7',2,94000,0,1),
+(N'Bàn số 8',2,94000,0,1),
+(N'Bàn số 9',3,134000,0,1),
+(N'Bàn số 10',3,134000,0,1),
+(N'Bàn số 11',3,134000,0,1),
+(N'Bàn số 12',3,134000,0,1),
+(N'Bàn số 13',3,134000,0,1),
+(N'Bàn số 14',3,134000,0,1),
+(N'Bàn số 15',3,134000,0,1),
+(N'Bàn số 16',3,134000,0,1)
 GO
 CREATE TABLE Customer
 (

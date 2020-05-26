@@ -27,7 +27,8 @@ namespace QlBida
             LoadService();
         }
 
-        private void LoadSvCat() {
+        private void LoadSvCat()
+        {
             var data = from c in db.ServiceCategories
                        select c;
             cbxServiceCategory.DataSource = data;
@@ -58,9 +59,9 @@ namespace QlBida
             {
                 var row = dgvService.CurrentRow;
                 txtServiceName.Text = row.Cells[1].Value.ToString();
+                nmrQuantity.Value = (int)row.Cells[4].Value;
                 txtServicePrice.Text = row.Cells[5].Value.ToString();
-                nmrQuantity.Value = (int) row.Cells[4].Value;
-                cbxServiceCategory.SelectedValue = row.Cells[2].Value.ToString();
+                cbxServiceCategory.SelectedValue = row.Cells["CatId"].Value;
             }
         }
 
