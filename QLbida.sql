@@ -126,6 +126,7 @@ GO
 
 CREATE TABLE Account
 (
+	Id int primary key identity(1,1),
 	Name nvarchar(50),
 	Email varchar(100),
 	Phone varchar(10),
@@ -141,3 +142,5 @@ INSERT INTO ACCOUNT VALUES
 (N'Lê Thị Mai','Mai@gmail.com',0987654321,'NV03','123456',1),
 (N'Trần Trung Quân','Quan@gmail.com',0987654321,'NV04','123456',1)
 GO
+
+select * from BidaTable

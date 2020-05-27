@@ -88,6 +88,7 @@
             this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Thêm ";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnClear
             // 
@@ -97,6 +98,7 @@
             this.btnClear.TabIndex = 7;
             this.btnClear.Text = "Làm mới";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnCancel
             // 
@@ -133,6 +135,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmNewTable";
             this.Text = "Thêm bàn mới";
+            this.Load += new System.EventHandler(this.frmNewTable_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

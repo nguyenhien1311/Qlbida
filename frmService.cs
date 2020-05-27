@@ -12,7 +12,7 @@ namespace QlBida
 {
     public partial class frmService : Form
     {
-
+        private bool edit = true;
         private BidaDataContext db;
 
         public frmService()
@@ -58,16 +58,51 @@ namespace QlBida
             if (dgvService.CurrentRow != null)
             {
                 var row = dgvService.CurrentRow;
+                txtSvId.Text = row.Cells[0].Value.ToString();
                 txtServiceName.Text = row.Cells[1].Value.ToString();
                 nmrQuantity.Value = (int)row.Cells[4].Value;
                 txtServicePrice.Text = row.Cells[5].Value.ToString();
                 cbxServiceCategory.SelectedValue = row.Cells["CatId"].Value;
+                edit = true;
             }
         }
 
         private void dgvService_SelectionChanged(object sender, EventArgs e)
         {
             DetailsService();
+        }
+
+        private void btnNewService_Click(object sender, EventArgs e)
+        {
+            edit = false;
+            txtServiceName.Text = txtServicePrice.Text = "";
+            nmrQuantity.Value = 0;
+        }
+
+        private void btnSaveChange_Click(object sender, EventArgs e)
+        {
+            if (edit)
+            {
+                var svUdt = db.TableServices.SingleOrDefault(x=>x.SvId ==  Convert.ToInt32(txtSvId.Text));
+                svUdt.SvName = txtServiceName.Text;
+                svUdt.SvCatId = (cbxServiceCategory.SelectedItem as ServiceCategory).SvCatId;
+                svUdt.Quantity = (int)nmrQuantity.Value;
+                svUdt.Price = Convert.ToDouble(txtServicePrice.Text);
+                db.SubmitChanges();
+                LoadService();
+            }
+            else
+            {
+                TableService sv = new TableService();
+                sv.SvName = txtServiceName.Text;
+                sv.Price = Convert.ToDouble(txtServicePrice.Text);
+                sv.Quantity = (int)nmrQuantity.Value;
+                sv.SvCatId = (cbxServiceCategory.SelectedItem as ServiceCategory).SvCatId;
+                db.TableServices.InsertOnSubmit(sv);
+                db.SubmitChanges();
+                LoadService();
+            }
+
         }
     }
 }

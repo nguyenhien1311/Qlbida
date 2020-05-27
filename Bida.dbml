@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLBIDA" Class="BidaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=PC11_LAB4;Initial Catalog=QLBIDA;Persist Security Info=True;User ID=sa" SettingsObjectName="QlBida.Properties.Settings" SettingsPropertyName="QLBIDAConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Hien;Initial Catalog=QLBIDA;Persist Security Info=True;User ID=sa" SettingsObjectName="QlBida.Properties.Settings" SettingsPropertyName="QLBIDAConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TableCategory" Member="TableCategories">
     <Type Name="TableCategory">
       <Column Name="TableCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -61,16 +61,6 @@
       <Association Name="Customer_OrderTable" Member="OrderTables" ThisKey="CusId" OtherKey="CusId" Type="OrderTable" />
     </Type>
   </Table>
-  <Table Name="dbo.Account" Member="Accounts">
-    <Type Name="Account">
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="UserName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="AccLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.BidaTable" Member="BidaTables">
     <Type Name="BidaTable">
       <Column Name="TableId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -81,6 +71,17 @@
       <Column Name="TableStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="BidaTable_OrderTable" Member="OrderTables" ThisKey="TableId" OtherKey="TableId" Type="OrderTable" />
       <Association Name="TableCategory_BidaTable" Member="TableCategory" ThisKey="TableCatID" OtherKey="TableCatId" Type="TableCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AccLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

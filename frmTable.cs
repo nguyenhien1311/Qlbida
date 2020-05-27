@@ -16,7 +16,7 @@ namespace QlBida
         BidaDataContext bida;
         BidaTable tb;
         DateTime startTime, endTime;
-
+        Timer timer;
 
         public frmTable()
         {
@@ -95,7 +95,7 @@ namespace QlBida
             btn.BackColor = Color.RoyalBlue;
             var table = btn.Tag as BidaTable;
             int id = table.TableId;
-            txtTiming.Text = TimeSpan.FromSeconds(0).ToString();
+            txtTiming.Text = TimeSpan.FromSeconds((double)table.PlayTime).ToString();
             btnUpdateTable.Enabled = true;
             btnStartTime.Enabled = true;
             btnEndTime.Enabled = true;
@@ -125,14 +125,20 @@ namespace QlBida
 
         private void btnUpdateTable_Click(object sender, EventArgs e)
         {
-            frmUpdateTable frm = new frmUpdateTable();
+            frmUpdateTable frm = new frmUpdateTable(tb);
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.Show();
         }
 
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadTable();
+        }
+
         private void btnEndTime_Click(object sender, EventArgs e)
         {
-            countingPlayTime.Stop();
+            timer.Stop();
             endTime = DateTime.Now;
             MessageBox.Show(startTime.ToString() + Environment.NewLine + endTime.ToString());
             frmChoosePay frm = new frmChoosePay();
@@ -142,14 +148,14 @@ namespace QlBida
         private void btnStartTime_Click(object sender, EventArgs e)
         {
             startTime = DateTime.Now;
-            if (tb.PlayTime == 0)
-            {
-                countingPlayTime.Start();
-            }
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
 
 
-        private void countingPlayTime_Tick(object sender, EventArgs e)
+        void timer_Tick(object sender, EventArgs e)
         {
             tb.PlayTime++;
             txtTiming.Text = TimeSpan.FromSeconds((double)tb.PlayTime).ToString();

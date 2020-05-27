@@ -42,11 +42,12 @@
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtAccLevel = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLevelUp = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +75,7 @@
             this.dgvAccount.AllowUserToResizeColumns = false;
             this.dgvAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAccount.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.AccName,
             this.Email,
             this.AccPhone,
@@ -186,50 +188,61 @@
             this.txtAccLevel.Size = new System.Drawing.Size(133, 20);
             this.txtAccLevel.TabIndex = 14;
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.Location = new System.Drawing.Point(589, 356);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Thêm NV";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAdd.Location = new System.Drawing.Point(589, 356);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(87, 23);
+            this.btnAdd.TabIndex = 15;
+            this.btnAdd.Text = "Thêm NV";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button2
+            // btnSave
             // 
-            this.button2.Location = new System.Drawing.Point(708, 356);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 23);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Sửa thông tin";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(708, 356);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(87, 23);
+            this.btnSave.TabIndex = 17;
+            this.btnSave.Text = "Lưu thay đổi";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button3
+            // btnLevelUp
             // 
-            this.button3.Location = new System.Drawing.Point(589, 394);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 23);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Lưu thay đổi";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnLevelUp.Location = new System.Drawing.Point(589, 394);
+            this.btnLevelUp.Name = "btnLevelUp";
+            this.btnLevelUp.Size = new System.Drawing.Size(87, 23);
+            this.btnLevelUp.TabIndex = 18;
+            this.btnLevelUp.Text = "Thăng chức";
+            this.btnLevelUp.UseVisualStyleBackColor = true;
+            this.btnLevelUp.Click += new System.EventHandler(this.btnLevelUp_Click);
             // 
-            // button4
+            // btnDelete
             // 
-            this.button4.Location = new System.Drawing.Point(589, 433);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 23);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "Thăng chức";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnDelete.Location = new System.Drawing.Point(708, 394);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(87, 23);
+            this.btnDelete.TabIndex = 19;
+            this.btnDelete.Text = "Xóa NV";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // button5
+            // txtId
             // 
-            this.button5.Location = new System.Drawing.Point(708, 394);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 23);
-            this.button5.TabIndex = 19;
-            this.button5.Text = "Xóa NV";
-            this.button5.UseVisualStyleBackColor = true;
+            this.txtId.Location = new System.Drawing.Point(621, 7);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(133, 20);
+            this.txtId.TabIndex = 20;
+            this.txtId.Visible = false;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "IdNV";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // AccName
             // 
@@ -279,11 +292,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 486);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnLevelUp);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtAccLevel);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUserName);
@@ -324,11 +337,12 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtAccLevel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnLevelUp;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccPhone;

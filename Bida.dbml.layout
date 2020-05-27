@@ -38,12 +38,6 @@
         <elementListCompartment Id="5369c517-6f7c-423b-8164-73480c7ab8f6" absoluteBounds="3.515, 5.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9bb3ccf8-9759-43b3-8e1c-c2c387c562f3" absoluteBounds="6.75, 4.75, 2, 1.9631982421875005">
-      <DataClassMoniker Name="/BidaDataContext/Account" />
-      <nestedChildShapes>
-        <elementListCompartment Id="85c469fa-879a-44e1-85a8-304c63a05132" absoluteBounds="6.765, 5.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <associationConnector edgePoints="[(5.5 : 9.22199625651042); (6.25 : 9.22199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BidaDataContext/ServiceCategory/ServiceCategory_TableService" />
       <nodes>
@@ -51,7 +45,7 @@
         <classShapeMoniker Id="503e38e2-303a-4234-97e4-b66fc337f957" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 9.26044840494792); (10 : 9.26044840494792); (10 : 2.95359537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.25 : 9.26044840494792); (10.65625 : 9.26044840494792); (10.65625 : 2.95359537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BidaDataContext/TableService/TableService_OrdDetail" />
       <nodes>
         <classShapeMoniker Id="503e38e2-303a-4234-97e4-b66fc337f957" />
@@ -65,7 +59,7 @@
         <classShapeMoniker Id="8f12ca25-aea2-4863-9729-e864f6faec60" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.96079752604167); (6.46875 : 6.96079752604167); (6.46875 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 7.0569482421875); (6.84375 : 7.0569482421875); (6.84375 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BidaDataContext/Customer/Customer_OrderTable" />
       <nodes>
         <classShapeMoniker Id="76e466c5-7e87-40a5-9a7e-6d18b5b28011" />
@@ -78,7 +72,7 @@
         <elementListCompartment Id="44884d8f-e82a-4f21-b04a-018f73764f54" absoluteBounds="3.515, 1.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 2.48159912109375); (6.25 : 2.48159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.48159912109375); (6.25 : 2.48159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BidaDataContext/BidaTable/BidaTable_OrderTable" />
       <nodes>
         <classShapeMoniker Id="e141bdad-805c-47ea-a84c-0a435bb6a7b0" />
@@ -92,5 +86,11 @@
         <classShapeMoniker Id="e141bdad-805c-47ea-a84c-0a435bb6a7b0" />
       </nodes>
     </associationConnector>
+    <classShape Id="76703d60-354e-4e4c-8323-1e12e4f42f22" absoluteBounds="7.5, 4.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BidaDataContext/Account" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ff267d55-1dcb-4f32-9838-b2723b646bf5" absoluteBounds="7.5150000000000006, 5.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

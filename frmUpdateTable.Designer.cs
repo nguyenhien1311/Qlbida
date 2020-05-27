@@ -66,6 +66,7 @@
             this.btnClear.TabIndex = 16;
             this.btnClear.Text = "Làm mới";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSave
             // 
@@ -75,6 +76,7 @@
             this.btnSave.TabIndex = 15;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtPrice
             // 
@@ -133,6 +135,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmUpdateTable";
             this.Text = "Cập nhật thông tin bàn";
+            this.Load += new System.EventHandler(this.frmUpdateTable_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

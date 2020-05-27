@@ -30,6 +30,12 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvService = new System.Windows.Forms.DataGridView();
+            this.ServiceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CatId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,14 +45,8 @@
             this.nmrQuantity = new System.Windows.Forms.NumericUpDown();
             this.cbxServiceCategory = new System.Windows.Forms.ComboBox();
             this.btnNewService = new System.Windows.Forms.Button();
-            this.btnUpdateService = new System.Windows.Forms.Button();
             this.btnSaveChange = new System.Windows.Forms.Button();
-            this.ServiceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CatId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ServiceCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSvId = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvService)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
@@ -85,6 +85,52 @@
             this.dgvService.Size = new System.Drawing.Size(543, 443);
             this.dgvService.TabIndex = 0;
             this.dgvService.SelectionChanged += new System.EventHandler(this.dgvService_SelectionChanged);
+            // 
+            // ServiceId
+            // 
+            this.ServiceId.DataPropertyName = "Id";
+            this.ServiceId.HeaderText = "Mã DV";
+            this.ServiceId.Name = "ServiceId";
+            this.ServiceId.ReadOnly = true;
+            this.ServiceId.Width = 80;
+            // 
+            // ServiceName
+            // 
+            this.ServiceName.DataPropertyName = "Name";
+            this.ServiceName.HeaderText = "Tên dịch vụ";
+            this.ServiceName.Name = "ServiceName";
+            this.ServiceName.ReadOnly = true;
+            this.ServiceName.Width = 150;
+            // 
+            // CatId
+            // 
+            this.CatId.DataPropertyName = "CatId";
+            this.CatId.HeaderText = "Mã loại dv";
+            this.CatId.Name = "CatId";
+            this.CatId.ReadOnly = true;
+            this.CatId.Visible = false;
+            // 
+            // ServiceCategory
+            // 
+            this.ServiceCategory.DataPropertyName = "CatName";
+            this.ServiceCategory.HeaderText = "Loại dịch vụ";
+            this.ServiceCategory.Name = "ServiceCategory";
+            this.ServiceCategory.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            this.Quantity.HeaderText = "Số lượng";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "Price";
+            this.Price.HeaderText = "Giá";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.Width = 80;
             // 
             // label1
             // 
@@ -161,78 +207,33 @@
             this.btnNewService.TabIndex = 9;
             this.btnNewService.Text = "Thêm DV";
             this.btnNewService.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateService
-            // 
-            this.btnUpdateService.Location = new System.Drawing.Point(718, 240);
-            this.btnUpdateService.Name = "btnUpdateService";
-            this.btnUpdateService.Size = new System.Drawing.Size(83, 23);
-            this.btnUpdateService.TabIndex = 10;
-            this.btnUpdateService.Text = " Sửa thông tin";
-            this.btnUpdateService.UseVisualStyleBackColor = true;
+            this.btnNewService.Click += new System.EventHandler(this.btnNewService_Click);
             // 
             // btnSaveChange
             // 
-            this.btnSaveChange.Location = new System.Drawing.Point(594, 283);
+            this.btnSaveChange.Location = new System.Drawing.Point(718, 240);
             this.btnSaveChange.Name = "btnSaveChange";
             this.btnSaveChange.Size = new System.Drawing.Size(83, 23);
             this.btnSaveChange.TabIndex = 11;
             this.btnSaveChange.Text = "Lưu";
             this.btnSaveChange.UseVisualStyleBackColor = true;
+            this.btnSaveChange.Click += new System.EventHandler(this.btnSaveChange_Click);
             // 
-            // ServiceId
+            // txtSvId
             // 
-            this.ServiceId.DataPropertyName = "Id";
-            this.ServiceId.HeaderText = "Mã DV";
-            this.ServiceId.Name = "ServiceId";
-            this.ServiceId.ReadOnly = true;
-            this.ServiceId.Width = 80;
-            // 
-            // ServiceName
-            // 
-            this.ServiceName.DataPropertyName = "Name";
-            this.ServiceName.HeaderText = "Tên dịch vụ";
-            this.ServiceName.Name = "ServiceName";
-            this.ServiceName.ReadOnly = true;
-            this.ServiceName.Width = 150;
-            // 
-            // CatId
-            // 
-            this.CatId.DataPropertyName = "CatId";
-            this.CatId.HeaderText = "Mã loại dv";
-            this.CatId.Name = "CatId";
-            this.CatId.ReadOnly = true;
-            this.CatId.Visible = false;
-            // 
-            // ServiceCategory
-            // 
-            this.ServiceCategory.DataPropertyName = "CatName";
-            this.ServiceCategory.HeaderText = "Loại dịch vụ";
-            this.ServiceCategory.Name = "ServiceCategory";
-            this.ServiceCategory.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            this.Quantity.DataPropertyName = "Quantity";
-            this.Quantity.HeaderText = "Số lượng";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.DataPropertyName = "Price";
-            this.Price.HeaderText = "Giá";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            this.Price.Width = 80;
+            this.txtSvId.Location = new System.Drawing.Point(635, 12);
+            this.txtSvId.Name = "txtSvId";
+            this.txtSvId.Size = new System.Drawing.Size(120, 20);
+            this.txtSvId.TabIndex = 12;
+            this.txtSvId.Visible = false;
             // 
             // frmService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 486);
+            this.Controls.Add(this.txtSvId);
             this.Controls.Add(this.btnSaveChange);
-            this.Controls.Add(this.btnUpdateService);
             this.Controls.Add(this.btnNewService);
             this.Controls.Add(this.cbxServiceCategory);
             this.Controls.Add(this.nmrQuantity);
@@ -267,7 +268,6 @@
         private System.Windows.Forms.NumericUpDown nmrQuantity;
         private System.Windows.Forms.ComboBox cbxServiceCategory;
         private System.Windows.Forms.Button btnNewService;
-        private System.Windows.Forms.Button btnUpdateService;
         private System.Windows.Forms.Button btnSaveChange;
         private System.Windows.Forms.DataGridView dgvService;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceId;
@@ -276,5 +276,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.TextBox txtSvId;
     }
 }

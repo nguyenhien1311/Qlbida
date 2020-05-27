@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flpTableList = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,7 +47,7 @@
             this.btnAddService = new System.Windows.Forms.Button();
             this.btnNewTable = new System.Windows.Forms.Button();
             this.btnUpdateTable = new System.Windows.Forms.Button();
-            this.countingPlayTime = new System.Windows.Forms.Timer(this.components);
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -229,16 +228,22 @@
             this.btnUpdateTable.UseVisualStyleBackColor = true;
             this.btnUpdateTable.Click += new System.EventHandler(this.btnUpdateTable_Click);
             // 
-            // countingPlayTime
+            // btnRefresh
             // 
-            this.countingPlayTime.Interval = 1000;
-            this.countingPlayTime.Tick += new System.EventHandler(this.countingPlayTime_Tick);
+            this.btnRefresh.Location = new System.Drawing.Point(209, 447);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(80, 29);
+            this.btnRefresh.TabIndex = 17;
+            this.btnRefresh.Text = "Làm mới";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 486);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnUpdateTable);
             this.Controls.Add(this.btnNewTable);
             this.Controls.Add(this.btnAddService);
@@ -289,6 +294,6 @@
         private System.Windows.Forms.Button btnAddService;
         private System.Windows.Forms.Button btnNewTable;
         private System.Windows.Forms.Button btnUpdateTable;
-        private System.Windows.Forms.Timer countingPlayTime;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
