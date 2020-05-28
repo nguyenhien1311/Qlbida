@@ -12,10 +12,9 @@ namespace QlBida
 {
     public partial class frmTable : Form
     {
-
+        private int id;
         BidaDataContext bida;
         BidaTable tb;
-        DateTime startTime, endTime;
         Timer timer;
 
         public frmTable()
@@ -26,6 +25,7 @@ namespace QlBida
             btnStartTime.Enabled = false;
             btnEndTime.Enabled = false;
             btnAddService.Enabled = false;
+            btnEndTime.Enabled = false;
         }
 
         private void frmTable_Load(object sender, EventArgs e)
@@ -35,6 +35,7 @@ namespace QlBida
 
         private void LoadTable()
         {
+            bida = new BidaDataContext();
             flpTableList.Controls.Clear();
             var lstTable = from t in bida.BidaTables
                            join c in bida.TableCategories
@@ -77,16 +78,12 @@ namespace QlBida
 
         }
 
-        BidaTable TableDetails(int id)
+        void TableDetails(int id)
         {
             tb = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
             txtTableName.Text = tb.TableName;
             txtTablePrice.Text = tb.Price.ToString();
-            if (tb.PlayTime > 0)
-            {
-                btnStartTime.Enabled = false;
-            }
-            return tb;
+            txtTiming.Text = (DateTime.Now - tb.StartTime).ToString();
         }
 
         void btn_Click(object sender, EventArgs e)
@@ -94,11 +91,9 @@ namespace QlBida
             Button btn = sender as Button;
             btn.BackColor = Color.RoyalBlue;
             var table = btn.Tag as BidaTable;
-            int id = table.TableId;
-            txtTiming.Text = TimeSpan.FromSeconds((double)table.PlayTime).ToString();
+            id = table.TableId;
             btnUpdateTable.Enabled = true;
             btnStartTime.Enabled = true;
-            btnEndTime.Enabled = true;
             btnAddService.Enabled = true;
             TableDetails(id);
         }
@@ -130,7 +125,6 @@ namespace QlBida
             frm.Show();
         }
 
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadTable();
@@ -139,26 +133,27 @@ namespace QlBida
         private void btnEndTime_Click(object sender, EventArgs e)
         {
             timer.Stop();
-            endTime = DateTime.Now;
-            MessageBox.Show(startTime.ToString() + Environment.NewLine + endTime.ToString());
+            tb.EndTime = DateTime.Now;
+            MessageBox.Show(tb.StartTime.ToString() + Environment.NewLine + tb.EndTime.ToString());
             frmChoosePay frm = new frmChoosePay();
             frm.Show();
         }
 
         private void btnStartTime_Click(object sender, EventArgs e)
         {
-            startTime = DateTime.Now;
+            btnStartTime.Enabled = false;
+            btnEndTime.Enabled = true;
+            tb.StartTime = DateTime.Now;
             timer = new Timer();
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
             timer.Start();
         }
 
-
         void timer_Tick(object sender, EventArgs e)
         {
-            tb.PlayTime++;
-            txtTiming.Text = TimeSpan.FromSeconds((double)tb.PlayTime).ToString();
+            var time = DateTime.Now - tb.StartTime;
+            txtTiming.Text = time.ToString();
         }
     }
 }

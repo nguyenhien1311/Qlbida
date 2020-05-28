@@ -4,8 +4,8 @@ USE QLBIDA
 GO
 CREATE TABLE TableCategory
 (
-	TableCatId int primary key identity(1,1),
-	TableCatName nvarchar(50)
+TableCatId int primary key identity(1,1),
+TableCatName nvarchar(50)
 )
 go
 INSERT INTO TableCategory VALUES 
@@ -16,39 +16,40 @@ GO
 
 CREATE TABLE BidaTable
 (
-	TableId int primary key identity(1,1),
-	TableName nvarchar(50),
-	TableCatID int foreign key references TableCategory(TableCatId),
-	Price float,
-	PlayTime int default(0),
-	TableStatus int default(1),
+TableId int primary key identity(1,1),
+TableName nvarchar(50),
+TableCatID int foreign key references TableCategory(TableCatId),
+Price float,
+StartTime datetime, 
+EndTime datetime,
+TableStatus int default(1),
 )
 go
-INSERT INTO BidaTable VALUES 
-(N'Bàn số 1',1,80000,0,1),
-(N'Bàn số 2',1,80000,0,1),
-(N'Bàn số 3',1,80000,0,1),	
-(N'Bàn số 4',1,80000,0,1),
-(N'Bàn số 5',2,94000,0,1),
-(N'Bàn số 6',2,94000,0,1),
-(N'Bàn số 7',2,94000,0,1),
-(N'Bàn số 8',2,94000,0,1),
-(N'Bàn số 9',3,134000,0,1),
-(N'Bàn số 10',3,134000,0,1),
-(N'Bàn số 11',3,134000,0,1),
-(N'Bàn số 12',3,134000,0,1),
-(N'Bàn số 13',3,134000,0,1),
-(N'Bàn số 14',3,134000,0,1),
-(N'Bàn số 15',3,134000,0,1),
-(N'Bàn số 16',3,134000,0,1)
+INSERT INTO BidaTable(TableName,TableCatID,Price,TableStatus) VALUES 
+(N'Bàn số 1',1,80000,1),
+(N'Bàn số 2',1,80000,1),
+(N'Bàn số 3',1,80000,1),	
+(N'Bàn số 4',1,80000,1),
+(N'Bàn số 5',2,94000,1),
+(N'Bàn số 6',2,94000,1),
+(N'Bàn số 7',2,94000,1),
+(N'Bàn số 8',2,94000,1),
+(N'Bàn số 9',3,134000,1),
+(N'Bàn số 10',3,134000,1),
+(N'Bàn số 11',3,134000,1),
+(N'Bàn số 12',3,134000,1),
+(N'Bàn số 13',3,134000,1),
+(N'Bàn số 14',3,134000,1),
+(N'Bàn số 15',3,134000,1),
+(N'Bàn số 16',3,134000,1)
 GO
 CREATE TABLE Customer
 (
-	CusId int primary key identity(1,1),
-	CusName nvarchar(100),
-	CusAddress nvarchar(200),
-	CusPhone varchar(10),
-	CusLevel int default(0)
+CusId int primary key identity(1,1),
+CusName nvarchar(100),
+CusAddress nvarchar(200),
+CusPhone varchar(10),
+CusLevel int default(0)
 )
 go
 INSERT INTO Customer VALUES
@@ -62,8 +63,8 @@ INSERT INTO Customer VALUES
 GO
 CREATE TABLE ServiceCategory
 (
-	SvCatId int primary key identity(1,1),
-	SvCatName nvarchar(30)
+SvCatId int primary key identity(1,1),
+SvCatName nvarchar(30)
 )
 go
 INSERT INTO ServiceCategory VALUES 
@@ -73,11 +74,11 @@ INSERT INTO ServiceCategory VALUES
 GO
 CREATE TABLE TableService
 (
-	SvId int primary key identity(1,1),
-	SvName nvarchar(50),
-	SvCatId int foreign key references ServiceCategory(SvCatId),
-	Price float,
-	Quantity int
+SvId int primary key identity(1,1),
+SvName nvarchar(50),
+SvCatId int foreign key references ServiceCategory(SvCatId),
+Price float,
+Quantity int
 )
 go
 INSERT INTO TableService VALUES 
@@ -103,36 +104,35 @@ INSERT INTO TableService VALUES
 GO
 CREATE TABLE  OrderTable
 (
-	OrderId int primary key identity(1,1),
-	CusId int foreign key references Customer(CusId) null,
-	TableId int foreign key references BidaTable(TableId),
-	StartTime datetime, 
-	EndTime datetime,
-	Surcharge float default(0),
-	Price float,
-	Note nvarchar(300),
-	OrdStatus int
+OrderId int primary key identity(1,1),
+CusId int foreign key references Customer(CusId) null,
+TableId int foreign key references BidaTable(TableId),
+Surcharge float default(0),
+PlayTime int,
+Price float,
+Note nvarchar(300),
+OrdStatus int
 )
 go
 
 CREATE TABLE OrdDetail
 (
-	OrderId int foreign key references OrderTable(OrderId),
-	SvId  int foreign key references TableService(SvId),
-	Quantity int,
-	Price float
+OrderId int foreign key references OrderTable(OrderId),
+SvId  int foreign key references TableService(SvId),
+Quantity int,
+Price float
 )	
 GO
 
 CREATE TABLE Account
 (
-	Id int primary key identity(1,1),
-	Name nvarchar(50),
-	Email varchar(100),
-	Phone varchar(10),
-	UserName varchar(30),
-	Password varchar(30),
-	AccLevel int default(1)
+Id int primary key identity(1,1),
+Name nvarchar(50),
+Email varchar(100),
+Phone varchar(10),
+UserName varchar(30),
+Password varchar(30),
+AccLevel int default(1)
 )
 go
 INSERT INTO ACCOUNT VALUES

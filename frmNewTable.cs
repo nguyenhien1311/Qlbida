@@ -34,7 +34,6 @@ namespace QlBida
             tb.TableName = txtTableName.Text;
             tb.TableCatID = (cbxTableCat.SelectedItem as TableCategory).TableCatId;
             tb.Price = Convert.ToDouble(txtPrice.Text);
-            tb.PlayTime = 0;
             tb.TableStatus = 1;
             db.BidaTables.InsertOnSubmit(tb);
             db.SubmitChanges();

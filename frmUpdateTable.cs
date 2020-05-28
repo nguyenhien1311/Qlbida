@@ -60,7 +60,6 @@ namespace QlBida
             updateTb.TableName = txtNewTableName.Text;
             updateTb.TableCatID = (cbxTableCat.SelectedItem as TableCategory).TableCatId;
             updateTb.Price = Convert.ToDouble(txtPrice.Text);
-            updateTb.PlayTime = 0;
             updateTb.TableStatus = 1;
             db.SubmitChanges();
             if (MessageBox.Show("Sua thanh cong", "Sua thong tin ban", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
