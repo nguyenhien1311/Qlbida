@@ -39,9 +39,6 @@ namespace QlBida
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
-    partial void InsertServiceCategory(ServiceCategory instance);
-    partial void UpdateServiceCategory(ServiceCategory instance);
-    partial void DeleteServiceCategory(ServiceCategory instance);
     partial void InsertOrderTable(OrderTable instance);
     partial void UpdateOrderTable(OrderTable instance);
     partial void DeleteOrderTable(OrderTable instance);
@@ -51,6 +48,9 @@ namespace QlBida
     partial void InsertTableService(TableService instance);
     partial void UpdateTableService(TableService instance);
     partial void DeleteTableService(TableService instance);
+    partial void InsertServiceCategory(ServiceCategory instance);
+    partial void UpdateServiceCategory(ServiceCategory instance);
+    partial void DeleteServiceCategory(ServiceCategory instance);
     #endregion
 		
 		public BidaDataContext() : 
@@ -115,14 +115,6 @@ namespace QlBida
 			}
 		}
 		
-		public System.Data.Linq.Table<ServiceCategory> ServiceCategories
-		{
-			get
-			{
-				return this.GetTable<ServiceCategory>();
-			}
-		}
-		
 		public System.Data.Linq.Table<OrderTable> OrderTables
 		{
 			get
@@ -144,6 +136,14 @@ namespace QlBida
 			get
 			{
 				return this.GetTable<TableService>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ServiceCategory> ServiceCategories
+		{
+			get
+			{
+				return this.GetTable<ServiceCategory>();
 			}
 		}
 	}
@@ -372,6 +372,8 @@ namespace QlBida
 		
 		private System.Nullable<System.DateTime> _EndTime;
 		
+		private System.Nullable<int> _PlayTime;
+		
 		private System.Nullable<int> _TableStatus;
 		
 		private EntitySet<OrderTable> _OrderTables;
@@ -394,6 +396,8 @@ namespace QlBida
     partial void OnStartTimeChanged();
     partial void OnEndTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnEndTimeChanged();
+    partial void OnPlayTimeChanging(System.Nullable<int> value);
+    partial void OnPlayTimeChanged();
     partial void OnTableStatusChanging(System.Nullable<int> value);
     partial void OnTableStatusChanged();
     #endregion
@@ -525,6 +529,26 @@ namespace QlBida
 					this._EndTime = value;
 					this.SendPropertyChanged("EndTime");
 					this.OnEndTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlayTime", DbType="Int")]
+		public System.Nullable<int> PlayTime
+		{
+			get
+			{
+				return this._PlayTime;
+			}
+			set
+			{
+				if ((this._PlayTime != value))
+				{
+					this.OnPlayTimeChanging(value);
+					this.SendPropertyChanging();
+					this._PlayTime = value;
+					this.SendPropertyChanged("PlayTime");
+					this.OnPlayTimeChanged();
 				}
 			}
 		}
@@ -896,120 +920,6 @@ namespace QlBida
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceCategory")]
-	public partial class ServiceCategory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _SvCatId;
-		
-		private string _SvCatName;
-		
-		private EntitySet<TableService> _TableServices;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSvCatIdChanging(int value);
-    partial void OnSvCatIdChanged();
-    partial void OnSvCatNameChanging(string value);
-    partial void OnSvCatNameChanged();
-    #endregion
-		
-		public ServiceCategory()
-		{
-			this._TableServices = new EntitySet<TableService>(new Action<TableService>(this.attach_TableServices), new Action<TableService>(this.detach_TableServices));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvCatId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int SvCatId
-		{
-			get
-			{
-				return this._SvCatId;
-			}
-			set
-			{
-				if ((this._SvCatId != value))
-				{
-					this.OnSvCatIdChanging(value);
-					this.SendPropertyChanging();
-					this._SvCatId = value;
-					this.SendPropertyChanged("SvCatId");
-					this.OnSvCatIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvCatName", DbType="NVarChar(30)")]
-		public string SvCatName
-		{
-			get
-			{
-				return this._SvCatName;
-			}
-			set
-			{
-				if ((this._SvCatName != value))
-				{
-					this.OnSvCatNameChanging(value);
-					this.SendPropertyChanging();
-					this._SvCatName = value;
-					this.SendPropertyChanged("SvCatName");
-					this.OnSvCatNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceCategory_TableService", Storage="_TableServices", ThisKey="SvCatId", OtherKey="SvCatId")]
-		public EntitySet<TableService> TableServices
-		{
-			get
-			{
-				return this._TableServices;
-			}
-			set
-			{
-				this._TableServices.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TableServices(TableService entity)
-		{
-			this.SendPropertyChanging();
-			entity.ServiceCategory = this;
-		}
-		
-		private void detach_TableServices(TableService entity)
-		{
-			this.SendPropertyChanging();
-			entity.ServiceCategory = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderTable")]
 	public partial class OrderTable : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1024,11 +934,13 @@ namespace QlBida
 		
 		private System.Nullable<double> _Surcharge;
 		
+		private System.Nullable<System.DateTime> _StartTime;
+		
+		private System.Nullable<System.DateTime> _EndTime;
+		
 		private System.Nullable<int> _PlayTime;
 		
 		private System.Nullable<double> _Price;
-		
-		private string _Note;
 		
 		private System.Nullable<int> _OrdStatus;
 		
@@ -1048,12 +960,14 @@ namespace QlBida
     partial void OnTableIdChanged();
     partial void OnSurchargeChanging(System.Nullable<double> value);
     partial void OnSurchargeChanged();
+    partial void OnStartTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartTimeChanged();
+    partial void OnEndTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndTimeChanged();
     partial void OnPlayTimeChanging(System.Nullable<int> value);
     partial void OnPlayTimeChanged();
     partial void OnPriceChanging(System.Nullable<double> value);
     partial void OnPriceChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
     partial void OnOrdStatusChanging(System.Nullable<int> value);
     partial void OnOrdStatusChanged();
     #endregion
@@ -1153,6 +1067,46 @@ namespace QlBida
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> StartTime
+		{
+			get
+			{
+				return this._StartTime;
+			}
+			set
+			{
+				if ((this._StartTime != value))
+				{
+					this.OnStartTimeChanging(value);
+					this.SendPropertyChanging();
+					this._StartTime = value;
+					this.SendPropertyChanged("StartTime");
+					this.OnStartTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EndTime
+		{
+			get
+			{
+				return this._EndTime;
+			}
+			set
+			{
+				if ((this._EndTime != value))
+				{
+					this.OnEndTimeChanging(value);
+					this.SendPropertyChanging();
+					this._EndTime = value;
+					this.SendPropertyChanged("EndTime");
+					this.OnEndTimeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlayTime", DbType="Int")]
 		public System.Nullable<int> PlayTime
 		{
@@ -1189,26 +1143,6 @@ namespace QlBida
 					this._Price = value;
 					this.SendPropertyChanged("Price");
 					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="NVarChar(300)")]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
 				}
 			}
 		}
@@ -1632,6 +1566,120 @@ namespace QlBida
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceCategory")]
+	public partial class ServiceCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SvCatId;
+		
+		private string _SvCatName;
+		
+		private EntitySet<TableService> _TableServices;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSvCatIdChanging(int value);
+    partial void OnSvCatIdChanged();
+    partial void OnSvCatNameChanging(string value);
+    partial void OnSvCatNameChanged();
+    #endregion
+		
+		public ServiceCategory()
+		{
+			this._TableServices = new EntitySet<TableService>(new Action<TableService>(this.attach_TableServices), new Action<TableService>(this.detach_TableServices));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvCatId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SvCatId
+		{
+			get
+			{
+				return this._SvCatId;
+			}
+			set
+			{
+				if ((this._SvCatId != value))
+				{
+					this.OnSvCatIdChanging(value);
+					this.SendPropertyChanging();
+					this._SvCatId = value;
+					this.SendPropertyChanged("SvCatId");
+					this.OnSvCatIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvCatName", DbType="NVarChar(30)")]
+		public string SvCatName
+		{
+			get
+			{
+				return this._SvCatName;
+			}
+			set
+			{
+				if ((this._SvCatName != value))
+				{
+					this.OnSvCatNameChanging(value);
+					this.SendPropertyChanging();
+					this._SvCatName = value;
+					this.SendPropertyChanged("SvCatName");
+					this.OnSvCatNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceCategory_TableService", Storage="_TableServices", ThisKey="SvCatId", OtherKey="SvCatId")]
+		public EntitySet<TableService> TableServices
+		{
+			get
+			{
+				return this._TableServices;
+			}
+			set
+			{
+				this._TableServices.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TableServices(TableService entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceCategory = this;
+		}
+		
+		private void detach_TableServices(TableService entity)
+		{
+			this.SendPropertyChanging();
+			entity.ServiceCategory = null;
 		}
 	}
 }

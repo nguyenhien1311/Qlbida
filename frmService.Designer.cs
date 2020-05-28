@@ -47,6 +47,7 @@
             this.btnNewService = new System.Windows.Forms.Button();
             this.btnSaveChange = new System.Windows.Forms.Button();
             this.txtSvId = new System.Windows.Forms.TextBox();
+            this.btnAddCat = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvService)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmrQuantity)).BeginInit();
@@ -227,11 +228,22 @@
             this.txtSvId.TabIndex = 12;
             this.txtSvId.Visible = false;
             // 
+            // btnAddCat
+            // 
+            this.btnAddCat.Location = new System.Drawing.Point(594, 298);
+            this.btnAddCat.Name = "btnAddCat";
+            this.btnAddCat.Size = new System.Drawing.Size(83, 23);
+            this.btnAddCat.TabIndex = 13;
+            this.btnAddCat.Text = "Thêm loại DV";
+            this.btnAddCat.UseVisualStyleBackColor = true;
+            this.btnAddCat.Click += new System.EventHandler(this.btnAddCat_Click);
+            // 
             // frmService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 486);
+            this.Controls.Add(this.btnAddCat);
             this.Controls.Add(this.txtSvId);
             this.Controls.Add(this.btnSaveChange);
             this.Controls.Add(this.btnNewService);
@@ -277,5 +289,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.TextBox txtSvId;
+        private System.Windows.Forms.Button btnAddCat;
     }
 }

@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSurcharge = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTotalPrice = new System.Windows.Forms.TextBox();
             this.txtTableName = new System.Windows.Forms.TextBox();
@@ -67,7 +67,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txtSurcharge);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtTotalPrice);
             this.groupBox2.Controls.Add(this.txtTableName);
@@ -84,13 +84,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chi tiết hóa đơn";
             // 
-            // textBox1
+            // txtSurcharge
             // 
-            this.textBox1.Location = new System.Drawing.Point(450, 80);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(167, 20);
-            this.textBox1.TabIndex = 21;
+            this.txtSurcharge.Location = new System.Drawing.Point(450, 80);
+            this.txtSurcharge.Name = "txtSurcharge";
+            this.txtSurcharge.ReadOnly = true;
+            this.txtSurcharge.Size = new System.Drawing.Size(167, 20);
+            this.txtSurcharge.TabIndex = 21;
             // 
             // label6
             // 
@@ -179,6 +179,7 @@
             this.Name = "frmOrderDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chi tiết hóa đơn";
+            this.Load += new System.EventHandler(this.frmOrderDetails_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -192,7 +193,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSurcharge;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTotalPrice;
         private System.Windows.Forms.TextBox txtTableName;

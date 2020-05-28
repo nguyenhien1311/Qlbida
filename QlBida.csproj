@@ -63,6 +63,12 @@
     <Compile Include="frmAddService.Designer.cs">
       <DependentUpon>frmAddService.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChangeTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeTable.Designer.cs">
+      <DependentUpon>frmChangeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmChoosePay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,12 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewSvCat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSvCat.Designer.cs">
+      <DependentUpon>frmNewSvCat.cs</DependentUpon>
     </Compile>
     <Compile Include="frmNewTable.cs">
       <SubType>Form</SubType>
@@ -143,6 +155,9 @@
     <EmbeddedResource Include="frmAddService.resx">
       <DependentUpon>frmAddService.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeTable.resx">
+      <DependentUpon>frmChangeTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChoosePay.resx">
       <DependentUpon>frmChoosePay.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSvCat.resx">
+      <DependentUpon>frmNewSvCat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewTable.resx">
       <DependentUpon>frmNewTable.cs</DependentUpon>

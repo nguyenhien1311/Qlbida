@@ -35,6 +35,17 @@
             this.btnFillByDate = new System.Windows.Forms.Button();
             this.btnOrderDetails = new System.Windows.Forms.Button();
             this.btnExportReport = new System.Windows.Forms.Button();
+            this.OrdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TableId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Surcharge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderList)).BeginInit();
             this.SuspendLayout();
@@ -51,10 +62,25 @@
             // 
             // dgvOrderList
             // 
+            this.dgvOrderList.AllowUserToAddRows = false;
+            this.dgvOrderList.AllowUserToDeleteRows = false;
             this.dgvOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrderList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.OrdId,
+            this.CusId,
+            this.CusName,
+            this.TableId,
+            this.TableName,
+            this.StartTime,
+            this.EndTime,
+            this.Surcharge,
+            this.PlayTime,
+            this.Price,
+            this.Status});
             this.dgvOrderList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrderList.Location = new System.Drawing.Point(3, 16);
             this.dgvOrderList.Name = "dgvOrderList";
+            this.dgvOrderList.ReadOnly = true;
             this.dgvOrderList.Size = new System.Drawing.Size(793, 375);
             this.dgvOrderList.TabIndex = 0;
             // 
@@ -104,6 +130,83 @@
             this.btnExportReport.Text = "Xuất báo cáo";
             this.btnExportReport.UseVisualStyleBackColor = true;
             // 
+            // OrdId
+            // 
+            this.OrdId.DataPropertyName = "OrderId";
+            this.OrdId.HeaderText = "Mã hóa đơn";
+            this.OrdId.Name = "OrdId";
+            this.OrdId.ReadOnly = true;
+            // 
+            // CusId
+            // 
+            this.CusId.DataPropertyName = "CusId";
+            this.CusId.HeaderText = "Mã HV";
+            this.CusId.Name = "CusId";
+            this.CusId.ReadOnly = true;
+            // 
+            // CusName
+            // 
+            this.CusName.DataPropertyName = "CusName";
+            this.CusName.HeaderText = "HV";
+            this.CusName.Name = "CusName";
+            this.CusName.ReadOnly = true;
+            // 
+            // TableId
+            // 
+            this.TableId.DataPropertyName = "TableId";
+            this.TableId.HeaderText = "Mã bàn";
+            this.TableId.Name = "TableId";
+            this.TableId.ReadOnly = true;
+            // 
+            // TableName
+            // 
+            this.TableName.DataPropertyName = "TableName";
+            this.TableName.HeaderText = "Tên bàn";
+            this.TableName.Name = "TableName";
+            this.TableName.ReadOnly = true;
+            // 
+            // StartTime
+            // 
+            this.StartTime.DataPropertyName = "StartTime";
+            this.StartTime.HeaderText = "Bắt đầu";
+            this.StartTime.Name = "StartTime";
+            this.StartTime.ReadOnly = true;
+            // 
+            // EndTime
+            // 
+            this.EndTime.DataPropertyName = "EndTime";
+            this.EndTime.HeaderText = "Kết thúc";
+            this.EndTime.Name = "EndTime";
+            this.EndTime.ReadOnly = true;
+            // 
+            // Surcharge
+            // 
+            this.Surcharge.DataPropertyName = "Surcharge";
+            this.Surcharge.HeaderText = "Phụ phí";
+            this.Surcharge.Name = "Surcharge";
+            this.Surcharge.ReadOnly = true;
+            // 
+            // PlayTime
+            // 
+            this.PlayTime.DataPropertyName = "PlayTime";
+            this.PlayTime.HeaderText = "Thời gian chơi";
+            this.PlayTime.Name = "PlayTime";
+            this.PlayTime.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "Price";
+            this.Price.HeaderText = "Tổng tiền";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "OrdStatus";
+            this.Status.HeaderText = "Trạng thái";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
             // frmReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,6 +221,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmReport";
             this.Text = "frmReport";
+            this.Load += new System.EventHandler(this.frmReport_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderList)).EndInit();
             this.ResumeLayout(false);
@@ -134,5 +238,16 @@
         private System.Windows.Forms.Button btnOrderDetails;
         private System.Windows.Forms.Button btnExportReport;
         private System.Windows.Forms.DataGridView dgvOrderList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrdId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CusName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TableId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TableName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EndTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Surcharge;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
     }
 }

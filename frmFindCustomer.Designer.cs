@@ -30,14 +30,14 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvCusList = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnPay = new System.Windows.Forms.Button();
             this.CusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.btnPay = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
             this.SuspendLayout();
@@ -71,32 +71,6 @@
             this.dgvCusList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCusList.Size = new System.Drawing.Size(587, 269);
             this.dgvCusList.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Tên hội viên";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(97, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // btnPay
-            // 
-            this.btnPay.Location = new System.Drawing.Point(457, 347);
-            this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(145, 23);
-            this.btnPay.TabIndex = 3;
-            this.btnPay.Text = "Tiến hành thanh toán";
-            this.btnPay.UseVisualStyleBackColor = true;
-            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // CusId
             // 
@@ -136,13 +110,39 @@
             this.CusLevel.ReadOnly = true;
             this.CusLevel.Width = 90;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Tên hội viên";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(97, 21);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(154, 20);
+            this.txtName.TabIndex = 2;
+            // 
+            // btnPay
+            // 
+            this.btnPay.Location = new System.Drawing.Point(457, 347);
+            this.btnPay.Name = "btnPay";
+            this.btnPay.Size = new System.Drawing.Size(145, 23);
+            this.btnPay.TabIndex = 3;
+            this.btnPay.Text = "Tiến hành thanh toán";
+            this.btnPay.UseVisualStyleBackColor = true;
+            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
+            // 
             // frmFindCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 382);
             this.Controls.Add(this.btnPay);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFindCustomer";
@@ -161,7 +161,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvCusList;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnPay;
         private System.Windows.Forms.DataGridViewTextBoxColumn CusId;
         private System.Windows.Forms.DataGridViewTextBoxColumn CusName;

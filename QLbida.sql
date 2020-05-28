@@ -22,6 +22,7 @@ TableCatID int foreign key references TableCategory(TableCatId),
 Price float,
 StartTime datetime, 
 EndTime datetime,
+PlayTime int,
 TableStatus int default(1),
 )
 go
@@ -108,9 +109,10 @@ OrderId int primary key identity(1,1),
 CusId int foreign key references Customer(CusId) null,
 TableId int foreign key references BidaTable(TableId),
 Surcharge float default(0),
+StartTime datetime, 
+EndTime datetime,
 PlayTime int,
 Price float,
-Note nvarchar(300),
 OrdStatus int
 )
 go

@@ -40,5 +40,10 @@ namespace QlBida
                        };
             dgvService.DataSource = data;
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

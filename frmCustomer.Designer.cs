@@ -36,6 +36,7 @@
             this.CusPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.btnLevelUp = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -122,6 +123,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnDelete);
             this.groupBox2.Controls.Add(this.txtId);
             this.groupBox2.Controls.Add(this.btnLevelUp);
             this.groupBox2.Controls.Add(this.btnSave);
@@ -140,6 +142,14 @@
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin hội viên";
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(79, 38);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(158, 20);
+            this.txtId.TabIndex = 25;
+            this.txtId.Visible = false;
             // 
             // btnLevelUp
             // 
@@ -236,13 +246,15 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Họ tên";
             // 
-            // txtId
+            // btnDelete
             // 
-            this.txtId.Location = new System.Drawing.Point(79, 38);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(158, 20);
-            this.txtId.TabIndex = 25;
-            this.txtId.Visible = false;
+            this.btnDelete.Location = new System.Drawing.Point(184, 357);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(109, 23);
+            this.btnDelete.TabIndex = 26;
+            this.btnDelete.Text = "Xóa HV";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmCustomer
             // 
@@ -285,5 +297,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CusPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn CusLevel;
         private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

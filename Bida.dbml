@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLBIDA" Class="BidaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=PC11_LAB4;Initial Catalog=QLBIDA;Persist Security Info=True;User ID=sa" SettingsObjectName="QlBida.Properties.Settings" SettingsPropertyName="QLBIDAConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Hien;Initial Catalog=QLBIDA;Persist Security Info=True;User ID=sa" SettingsObjectName="QlBida.Properties.Settings" SettingsPropertyName="QLBIDAConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -19,6 +19,7 @@
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PlayTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TableStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="BidaTable_OrderTable" Member="OrderTables" ThisKey="TableId" OtherKey="TableId" Type="OrderTable" />
       <Association Name="TableCategory_BidaTable" Member="TableCategory" ThisKey="TableCatID" OtherKey="TableCatId" Type="TableCategory" IsForeignKey="true" />
@@ -44,22 +45,16 @@
       <Association Name="TableService_OrdDetail" Member="TableService" ThisKey="SvId" OtherKey="SvId" Type="TableService" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ServiceCategory" Member="ServiceCategories">
-    <Type Name="ServiceCategory">
-      <Column Name="SvCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="SvCatName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Association Name="ServiceCategory_TableService" Member="TableServices" ThisKey="SvCatId" OtherKey="SvCatId" Type="TableService" />
-    </Type>
-  </Table>
   <Table Name="dbo.OrderTable" Member="OrderTables">
     <Type Name="OrderTable">
       <Column Name="OrderId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TableId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Surcharge" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PlayTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
       <Column Name="OrdStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="OrderTable_OrdDetail" Member="OrdDetails" ThisKey="OrderId" OtherKey="OrderId" Type="OrdDetail" />
       <Association Name="Customer_OrderTable" Member="Customer" ThisKey="CusId" OtherKey="CusId" Type="Customer" IsForeignKey="true" />
@@ -82,6 +77,13 @@
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="TableService_OrdDetail" Member="OrdDetails" ThisKey="SvId" OtherKey="SvId" Type="OrdDetail" />
       <Association Name="ServiceCategory_TableService" Member="ServiceCategory" ThisKey="SvCatId" OtherKey="SvCatId" Type="ServiceCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServiceCategory" Member="ServiceCategories">
+    <Type Name="ServiceCategory">
+      <Column Name="SvCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SvCatName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="ServiceCategory_TableService" Member="TableServices" ThisKey="SvCatId" OtherKey="SvCatId" Type="TableService" />
     </Type>
   </Table>
 </Database>

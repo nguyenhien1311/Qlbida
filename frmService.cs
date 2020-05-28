@@ -104,5 +104,11 @@ namespace QlBida
             }
 
         }
+
+        private void btnAddCat_Click(object sender, EventArgs e)
+        {
+            frmNewSvCat frm = new frmNewSvCat();
+            frm.Show();
+        }
     }
 }

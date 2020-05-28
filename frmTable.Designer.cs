@@ -41,6 +41,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvSerive = new System.Windows.Forms.DataGridView();
+            this.SvId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTiming = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnChangeTable = new System.Windows.Forms.Button();
@@ -165,12 +168,39 @@
             // 
             // dgvSerive
             // 
+            this.dgvSerive.AllowUserToAddRows = false;
+            this.dgvSerive.AllowUserToDeleteRows = false;
             this.dgvSerive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSerive.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SvId,
+            this.SvName,
+            this.Quantity});
             this.dgvSerive.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSerive.Location = new System.Drawing.Point(0, 0);
             this.dgvSerive.Name = "dgvSerive";
+            this.dgvSerive.ReadOnly = true;
             this.dgvSerive.Size = new System.Drawing.Size(274, 194);
             this.dgvSerive.TabIndex = 15;
+            // 
+            // SvId
+            // 
+            this.SvId.HeaderText = "Mã ";
+            this.SvId.Name = "SvId";
+            this.SvId.ReadOnly = true;
+            this.SvId.Width = 50;
+            // 
+            // SvName
+            // 
+            this.SvName.HeaderText = "DV";
+            this.SvName.Name = "SvName";
+            this.SvName.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Số lượng";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 80;
             // 
             // txtTiming
             // 
@@ -197,6 +227,7 @@
             this.btnChangeTable.TabIndex = 13;
             this.btnChangeTable.Text = "Chuyển bàn";
             this.btnChangeTable.UseVisualStyleBackColor = true;
+            this.btnChangeTable.Click += new System.EventHandler(this.btnChangeTable_Click);
             // 
             // btnAddService
             // 
@@ -295,5 +326,8 @@
         private System.Windows.Forms.Button btnNewTable;
         private System.Windows.Forms.Button btnUpdateTable;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SvId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SvName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
     }
 }

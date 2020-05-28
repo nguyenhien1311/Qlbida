@@ -35,6 +35,7 @@ namespace QlBida
 
         private void LoadTable()
         {
+            
             bida = new BidaDataContext();
             flpTableList.Controls.Clear();
             var lstTable = from t in bida.BidaTables
@@ -47,6 +48,7 @@ namespace QlBida
                                CatName = c.TableCatName,
                                Status = t.TableStatus
                            };
+            //tạo button as bàn
             foreach (var table in lstTable)
             {
                 BidaTable bidaTable = bida.BidaTables.SingleOrDefault(x => x.TableId == table.Id);
@@ -73,9 +75,9 @@ namespace QlBida
                         break;
                 }
                 btn.Text = table.Name + Environment.NewLine + Environment.NewLine + table.CatName + Environment.NewLine + Environment.NewLine + status;
+                //thêm btn vào flpanel
                 flpTableList.Controls.Add(btn);
             }
-
         }
 
         void TableDetails(int id)
@@ -83,7 +85,8 @@ namespace QlBida
             tb = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
             txtTableName.Text = tb.TableName;
             txtTablePrice.Text = tb.Price.ToString();
-            txtTiming.Text = (DateTime.Now - tb.StartTime).ToString();
+
+            txtTiming.Text =TimeSpan.FromMinutes(Convert.ToDouble(tb.PlayTime)).ToString();
         }
 
         void btn_Click(object sender, EventArgs e)
@@ -135,7 +138,21 @@ namespace QlBida
             timer.Stop();
             tb.EndTime = DateTime.Now;
             MessageBox.Show(tb.StartTime.ToString() + Environment.NewLine + tb.EndTime.ToString());
-            frmChoosePay frm = new frmChoosePay();
+            OrderTable order = new OrderTable();
+            order.TableId = tb.TableId;
+            order.StartTime = tb.StartTime;
+            order.EndTime = tb.EndTime;
+            order.PlayTime = tb.PlayTime;
+            if (txtSurcharge.Text != "")
+            {
+
+                order.Surcharge = Convert.ToDouble(txtSurcharge.Text);
+            }
+            else
+            {
+                order.Surcharge = 0;
+            }
+            frmChoosePay frm = new frmChoosePay(order);
             frm.Show();
         }
 
@@ -152,8 +169,47 @@ namespace QlBida
 
         void timer_Tick(object sender, EventArgs e)
         {
-            var time = DateTime.Now - tb.StartTime;
-            txtTiming.Text = time.ToString();
+            if (tb.PlayTime == null)
+            {
+                var time = DateTime.Now - tb.StartTime;
+                if (time != null)
+                {
+                    if (time.Value.TotalMinutes >= 1)
+                    {
+                        tb.PlayTime = (int)time.Value.TotalMinutes;
+                        bida.SubmitChanges();
+                    }
+                    txtTiming.Text = TimeSpan.FromMinutes(time.Value.TotalMinutes).ToString();
+                }
+                else
+                {
+                    txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
+                }
+            }
+            else
+            {
+                var time = DateTime.Now - tb.StartTime;
+                if (time != null)
+                {
+                    double ptime = (double)tb.PlayTime;
+                    if (time.Value.TotalMinutes >= 1)
+                    {
+                        tb.PlayTime = (int)time.Value.TotalMinutes;
+                        bida.SubmitChanges();
+                    }
+                    txtTiming.Text = TimeSpan.FromMinutes(time.Value.TotalMinutes+ ptime).ToString();
+                }
+                else
+                {
+                    txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
+                }
+            }
+        }
+
+        private void btnChangeTable_Click(object sender, EventArgs e)
+        {
+            frmChangeTable frm = new frmChangeTable(tb);
+            frm.Show();
         }
     }
 }

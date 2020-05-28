@@ -12,21 +12,24 @@ namespace QlBida
 {
     public partial class frmChoosePay : Form
     {
-        public frmChoosePay()
+
+        OrderTable ord;
+        public frmChoosePay(OrderTable order)
         {
             InitializeComponent();
+            ord = order;
         }
 
         private void btnCustomerPayment_Click(object sender, EventArgs e)
         {
-            frmFindCustomer frm = new frmFindCustomer();
+            frmFindCustomer frm = new frmFindCustomer(ord);
             frm.Show();
             this.Close();
         }
 
         private void btnDefaultPayment_Click(object sender, EventArgs e)
         {
-            frmShowBill frm = new frmShowBill();
+            frmShowBill frm = new frmShowBill(ord);
             frm.Show();
             this.Close();
         }

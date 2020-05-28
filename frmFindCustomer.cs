@@ -13,16 +13,22 @@ namespace QlBida
     public partial class frmFindCustomer : Form
     {
         private BidaDataContext db;
-        public frmFindCustomer()
+        Customer cus;
+        OrderTable ord;
+        public frmFindCustomer(OrderTable order)
         {
             InitializeComponent();
             db = new BidaDataContext();
+            ord = order;
         }
 
         private void btnPay_Click(object sender, EventArgs e)
         {
-
-            frmShowBill frm = new frmShowBill();
+            var row = dgvCusList.CurrentRow;
+            int id = (int)row.Cells[0].Value;
+            var result = db.Customers.SingleOrDefault(x => x.CusId == id);
+            cus = result;
+            frmShowBill frm = new frmShowBill(cus,ord);
             frm.Show();
             this.Close();
         }
@@ -32,7 +38,8 @@ namespace QlBida
             LoadCustomer();
         }
 
-        private void LoadCustomer() {
+        private void LoadCustomer()
+        {
             var data = from c in db.Customers
                        select c;
             dgvCusList.DataSource = data;

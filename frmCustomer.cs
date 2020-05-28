@@ -88,5 +88,13 @@ namespace QlBida
             db.SubmitChanges();
             LoadCustomer();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var cus = db.Customers.SingleOrDefault(x => x.CusId == Convert.ToInt32(txtId.Text));
+            db.Customers.DeleteOnSubmit(cus);
+            db.SubmitChanges();
+            LoadCustomer();
+        }
     }
 }
