@@ -39,18 +39,21 @@ namespace QlBida
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
+    partial void InsertOrdDetail(OrdDetail instance);
+    partial void UpdateOrdDetail(OrdDetail instance);
+    partial void DeleteOrdDetail(OrdDetail instance);
     partial void InsertOrderTable(OrderTable instance);
     partial void UpdateOrderTable(OrderTable instance);
     partial void DeleteOrderTable(OrderTable instance);
-    partial void InsertTableCategory(TableCategory instance);
-    partial void UpdateTableCategory(TableCategory instance);
-    partial void DeleteTableCategory(TableCategory instance);
-    partial void InsertTableService(TableService instance);
-    partial void UpdateTableService(TableService instance);
-    partial void DeleteTableService(TableService instance);
     partial void InsertServiceCategory(ServiceCategory instance);
     partial void UpdateServiceCategory(ServiceCategory instance);
     partial void DeleteServiceCategory(ServiceCategory instance);
+    partial void InsertTableService(TableService instance);
+    partial void UpdateTableService(TableService instance);
+    partial void DeleteTableService(TableService instance);
+    partial void InsertTableCategory(TableCategory instance);
+    partial void UpdateTableCategory(TableCategory instance);
+    partial void DeleteTableCategory(TableCategory instance);
     #endregion
 		
 		public BidaDataContext() : 
@@ -123,11 +126,11 @@ namespace QlBida
 			}
 		}
 		
-		public System.Data.Linq.Table<TableCategory> TableCategories
+		public System.Data.Linq.Table<ServiceCategory> ServiceCategories
 		{
 			get
 			{
-				return this.GetTable<TableCategory>();
+				return this.GetTable<ServiceCategory>();
 			}
 		}
 		
@@ -139,11 +142,11 @@ namespace QlBida
 			}
 		}
 		
-		public System.Data.Linq.Table<ServiceCategory> ServiceCategories
+		public System.Data.Linq.Table<TableCategory> TableCategories
 		{
 			get
 			{
-				return this.GetTable<ServiceCategory>();
+				return this.GetTable<TableCategory>();
 			}
 		}
 	}
@@ -840,23 +843,46 @@ namespace QlBida
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrdDetail")]
-	public partial class OrdDetail
+	public partial class OrdDetail : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private System.Nullable<int> _OrderId;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Nullable<int> _SvId;
+		private int _OrderId;
+		
+		private int _SvId;
 		
 		private System.Nullable<int> _Quantity;
 		
 		private System.Nullable<double> _Price;
 		
+		private EntityRef<OrderTable> _OrderTable;
+		
+		private EntityRef<TableService> _TableService;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrderIdChanging(int value);
+    partial void OnOrderIdChanged();
+    partial void OnSvIdChanging(int value);
+    partial void OnSvIdChanged();
+    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    #endregion
+		
 		public OrdDetail()
 		{
+			this._OrderTable = default(EntityRef<OrderTable>);
+			this._TableService = default(EntityRef<TableService>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderId", DbType="Int")]
-		public System.Nullable<int> OrderId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int OrderId
 		{
 			get
 			{
@@ -866,13 +892,21 @@ namespace QlBida
 			{
 				if ((this._OrderId != value))
 				{
+					if (this._OrderTable.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrderIdChanging(value);
+					this.SendPropertyChanging();
 					this._OrderId = value;
+					this.SendPropertyChanged("OrderId");
+					this.OnOrderIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvId", DbType="Int")]
-		public System.Nullable<int> SvId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SvId
 		{
 			get
 			{
@@ -882,7 +916,15 @@ namespace QlBida
 			{
 				if ((this._SvId != value))
 				{
+					if (this._TableService.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSvIdChanging(value);
+					this.SendPropertyChanging();
 					this._SvId = value;
+					this.SendPropertyChanged("SvId");
+					this.OnSvIdChanged();
 				}
 			}
 		}
@@ -898,7 +940,11 @@ namespace QlBida
 			{
 				if ((this._Quantity != value))
 				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
 					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
 				}
 			}
 		}
@@ -914,8 +960,100 @@ namespace QlBida
 			{
 				if ((this._Price != value))
 				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
 					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OrderTable_OrdDetail", Storage="_OrderTable", ThisKey="OrderId", OtherKey="OrderId", IsForeignKey=true)]
+		public OrderTable OrderTable
+		{
+			get
+			{
+				return this._OrderTable.Entity;
+			}
+			set
+			{
+				OrderTable previousValue = this._OrderTable.Entity;
+				if (((previousValue != value) 
+							|| (this._OrderTable.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OrderTable.Entity = null;
+						previousValue.OrdDetails.Remove(this);
+					}
+					this._OrderTable.Entity = value;
+					if ((value != null))
+					{
+						value.OrdDetails.Add(this);
+						this._OrderId = value.OrderId;
+					}
+					else
+					{
+						this._OrderId = default(int);
+					}
+					this.SendPropertyChanged("OrderTable");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TableService_OrdDetail", Storage="_TableService", ThisKey="SvId", OtherKey="SvId", IsForeignKey=true)]
+		public TableService TableService
+		{
+			get
+			{
+				return this._TableService.Entity;
+			}
+			set
+			{
+				TableService previousValue = this._TableService.Entity;
+				if (((previousValue != value) 
+							|| (this._TableService.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TableService.Entity = null;
+						previousValue.OrdDetails.Remove(this);
+					}
+					this._TableService.Entity = value;
+					if ((value != null))
+					{
+						value.OrdDetails.Add(this);
+						this._SvId = value.SvId;
+					}
+					else
+					{
+						this._SvId = default(int);
+					}
+					this.SendPropertyChanged("TableService");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -943,6 +1081,8 @@ namespace QlBida
 		private System.Nullable<double> _Price;
 		
 		private System.Nullable<int> _OrdStatus;
+		
+		private EntitySet<OrdDetail> _OrdDetails;
 		
 		private EntityRef<Customer> _Customer;
 		
@@ -974,6 +1114,7 @@ namespace QlBida
 		
 		public OrderTable()
 		{
+			this._OrdDetails = new EntitySet<OrdDetail>(new Action<OrdDetail>(this.attach_OrdDetails), new Action<OrdDetail>(this.detach_OrdDetails));
 			this._Customer = default(EntityRef<Customer>);
 			this._BidaTable = default(EntityRef<BidaTable>);
 			OnCreated();
@@ -1167,6 +1308,19 @@ namespace QlBida
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OrderTable_OrdDetail", Storage="_OrdDetails", ThisKey="OrderId", OtherKey="OrderId")]
+		public EntitySet<OrdDetail> OrdDetails
+		{
+			get
+			{
+				return this._OrdDetails;
+			}
+			set
+			{
+				this._OrdDetails.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_OrderTable", Storage="_Customer", ThisKey="CusId", OtherKey="CusId", IsForeignKey=true)]
 		public Customer Customer
 		{
@@ -1254,318 +1408,17 @@ namespace QlBida
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TableCategory")]
-	public partial class TableCategory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TableCatId;
-		
-		private string _TableCatName;
-		
-		private EntitySet<BidaTable> _BidaTables;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTableCatIdChanging(int value);
-    partial void OnTableCatIdChanged();
-    partial void OnTableCatNameChanging(string value);
-    partial void OnTableCatNameChanged();
-    #endregion
-		
-		public TableCategory()
-		{
-			this._BidaTables = new EntitySet<BidaTable>(new Action<BidaTable>(this.attach_BidaTables), new Action<BidaTable>(this.detach_BidaTables));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TableCatId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TableCatId
-		{
-			get
-			{
-				return this._TableCatId;
-			}
-			set
-			{
-				if ((this._TableCatId != value))
-				{
-					this.OnTableCatIdChanging(value);
-					this.SendPropertyChanging();
-					this._TableCatId = value;
-					this.SendPropertyChanged("TableCatId");
-					this.OnTableCatIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TableCatName", DbType="NVarChar(50)")]
-		public string TableCatName
-		{
-			get
-			{
-				return this._TableCatName;
-			}
-			set
-			{
-				if ((this._TableCatName != value))
-				{
-					this.OnTableCatNameChanging(value);
-					this.SendPropertyChanging();
-					this._TableCatName = value;
-					this.SendPropertyChanged("TableCatName");
-					this.OnTableCatNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TableCategory_BidaTable", Storage="_BidaTables", ThisKey="TableCatId", OtherKey="TableCatID")]
-		public EntitySet<BidaTable> BidaTables
-		{
-			get
-			{
-				return this._BidaTables;
-			}
-			set
-			{
-				this._BidaTables.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_BidaTables(BidaTable entity)
+		private void attach_OrdDetails(OrdDetail entity)
 		{
 			this.SendPropertyChanging();
-			entity.TableCategory = this;
+			entity.OrderTable = this;
 		}
 		
-		private void detach_BidaTables(BidaTable entity)
+		private void detach_OrdDetails(OrdDetail entity)
 		{
 			this.SendPropertyChanging();
-			entity.TableCategory = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TableService")]
-	public partial class TableService : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _SvId;
-		
-		private string _SvName;
-		
-		private System.Nullable<int> _SvCatId;
-		
-		private System.Nullable<double> _Price;
-		
-		private System.Nullable<int> _Quantity;
-		
-		private EntityRef<ServiceCategory> _ServiceCategory;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSvIdChanging(int value);
-    partial void OnSvIdChanged();
-    partial void OnSvNameChanging(string value);
-    partial void OnSvNameChanged();
-    partial void OnSvCatIdChanging(System.Nullable<int> value);
-    partial void OnSvCatIdChanged();
-    partial void OnPriceChanging(System.Nullable<double> value);
-    partial void OnPriceChanged();
-    partial void OnQuantityChanging(System.Nullable<int> value);
-    partial void OnQuantityChanged();
-    #endregion
-		
-		public TableService()
-		{
-			this._ServiceCategory = default(EntityRef<ServiceCategory>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int SvId
-		{
-			get
-			{
-				return this._SvId;
-			}
-			set
-			{
-				if ((this._SvId != value))
-				{
-					this.OnSvIdChanging(value);
-					this.SendPropertyChanging();
-					this._SvId = value;
-					this.SendPropertyChanged("SvId");
-					this.OnSvIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvName", DbType="NVarChar(50)")]
-		public string SvName
-		{
-			get
-			{
-				return this._SvName;
-			}
-			set
-			{
-				if ((this._SvName != value))
-				{
-					this.OnSvNameChanging(value);
-					this.SendPropertyChanging();
-					this._SvName = value;
-					this.SendPropertyChanged("SvName");
-					this.OnSvNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvCatId", DbType="Int")]
-		public System.Nullable<int> SvCatId
-		{
-			get
-			{
-				return this._SvCatId;
-			}
-			set
-			{
-				if ((this._SvCatId != value))
-				{
-					if (this._ServiceCategory.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSvCatIdChanging(value);
-					this.SendPropertyChanging();
-					this._SvCatId = value;
-					this.SendPropertyChanged("SvCatId");
-					this.OnSvCatIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
-		public System.Nullable<double> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
-		public System.Nullable<int> Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this.OnQuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceCategory_TableService", Storage="_ServiceCategory", ThisKey="SvCatId", OtherKey="SvCatId", IsForeignKey=true)]
-		public ServiceCategory ServiceCategory
-		{
-			get
-			{
-				return this._ServiceCategory.Entity;
-			}
-			set
-			{
-				ServiceCategory previousValue = this._ServiceCategory.Entity;
-				if (((previousValue != value) 
-							|| (this._ServiceCategory.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ServiceCategory.Entity = null;
-						previousValue.TableServices.Remove(this);
-					}
-					this._ServiceCategory.Entity = value;
-					if ((value != null))
-					{
-						value.TableServices.Add(this);
-						this._SvCatId = value.SvCatId;
-					}
-					else
-					{
-						this._SvCatId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("ServiceCategory");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			entity.OrderTable = null;
 		}
 	}
 	
@@ -1680,6 +1533,347 @@ namespace QlBida
 		{
 			this.SendPropertyChanging();
 			entity.ServiceCategory = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TableService")]
+	public partial class TableService : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SvId;
+		
+		private string _SvName;
+		
+		private System.Nullable<int> _SvCatId;
+		
+		private System.Nullable<double> _Price;
+		
+		private System.Nullable<int> _Quantity;
+		
+		private EntitySet<OrdDetail> _OrdDetails;
+		
+		private EntityRef<ServiceCategory> _ServiceCategory;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSvIdChanging(int value);
+    partial void OnSvIdChanged();
+    partial void OnSvNameChanging(string value);
+    partial void OnSvNameChanged();
+    partial void OnSvCatIdChanging(System.Nullable<int> value);
+    partial void OnSvCatIdChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanged();
+    #endregion
+		
+		public TableService()
+		{
+			this._OrdDetails = new EntitySet<OrdDetail>(new Action<OrdDetail>(this.attach_OrdDetails), new Action<OrdDetail>(this.detach_OrdDetails));
+			this._ServiceCategory = default(EntityRef<ServiceCategory>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SvId
+		{
+			get
+			{
+				return this._SvId;
+			}
+			set
+			{
+				if ((this._SvId != value))
+				{
+					this.OnSvIdChanging(value);
+					this.SendPropertyChanging();
+					this._SvId = value;
+					this.SendPropertyChanged("SvId");
+					this.OnSvIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvName", DbType="NVarChar(50)")]
+		public string SvName
+		{
+			get
+			{
+				return this._SvName;
+			}
+			set
+			{
+				if ((this._SvName != value))
+				{
+					this.OnSvNameChanging(value);
+					this.SendPropertyChanging();
+					this._SvName = value;
+					this.SendPropertyChanged("SvName");
+					this.OnSvNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SvCatId", DbType="Int")]
+		public System.Nullable<int> SvCatId
+		{
+			get
+			{
+				return this._SvCatId;
+			}
+			set
+			{
+				if ((this._SvCatId != value))
+				{
+					if (this._ServiceCategory.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSvCatIdChanging(value);
+					this.SendPropertyChanging();
+					this._SvCatId = value;
+					this.SendPropertyChanged("SvCatId");
+					this.OnSvCatIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
+		public System.Nullable<int> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TableService_OrdDetail", Storage="_OrdDetails", ThisKey="SvId", OtherKey="SvId")]
+		public EntitySet<OrdDetail> OrdDetails
+		{
+			get
+			{
+				return this._OrdDetails;
+			}
+			set
+			{
+				this._OrdDetails.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceCategory_TableService", Storage="_ServiceCategory", ThisKey="SvCatId", OtherKey="SvCatId", IsForeignKey=true)]
+		public ServiceCategory ServiceCategory
+		{
+			get
+			{
+				return this._ServiceCategory.Entity;
+			}
+			set
+			{
+				ServiceCategory previousValue = this._ServiceCategory.Entity;
+				if (((previousValue != value) 
+							|| (this._ServiceCategory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ServiceCategory.Entity = null;
+						previousValue.TableServices.Remove(this);
+					}
+					this._ServiceCategory.Entity = value;
+					if ((value != null))
+					{
+						value.TableServices.Add(this);
+						this._SvCatId = value.SvCatId;
+					}
+					else
+					{
+						this._SvCatId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ServiceCategory");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_OrdDetails(OrdDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TableService = this;
+		}
+		
+		private void detach_OrdDetails(OrdDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TableService = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TableCategory")]
+	public partial class TableCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TableCatId;
+		
+		private string _TableCatName;
+		
+		private EntitySet<BidaTable> _BidaTables;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTableCatIdChanging(int value);
+    partial void OnTableCatIdChanged();
+    partial void OnTableCatNameChanging(string value);
+    partial void OnTableCatNameChanged();
+    #endregion
+		
+		public TableCategory()
+		{
+			this._BidaTables = new EntitySet<BidaTable>(new Action<BidaTable>(this.attach_BidaTables), new Action<BidaTable>(this.detach_BidaTables));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TableCatId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TableCatId
+		{
+			get
+			{
+				return this._TableCatId;
+			}
+			set
+			{
+				if ((this._TableCatId != value))
+				{
+					this.OnTableCatIdChanging(value);
+					this.SendPropertyChanging();
+					this._TableCatId = value;
+					this.SendPropertyChanged("TableCatId");
+					this.OnTableCatIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TableCatName", DbType="NVarChar(50)")]
+		public string TableCatName
+		{
+			get
+			{
+				return this._TableCatName;
+			}
+			set
+			{
+				if ((this._TableCatName != value))
+				{
+					this.OnTableCatNameChanging(value);
+					this.SendPropertyChanging();
+					this._TableCatName = value;
+					this.SendPropertyChanged("TableCatName");
+					this.OnTableCatNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TableCategory_BidaTable", Storage="_BidaTables", ThisKey="TableCatId", OtherKey="TableCatID")]
+		public EntitySet<BidaTable> BidaTables
+		{
+			get
+			{
+				return this._BidaTables;
+			}
+			set
+			{
+				this._BidaTables.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_BidaTables(BidaTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.TableCategory = this;
+		}
+		
+		private void detach_BidaTables(BidaTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.TableCategory = null;
 		}
 	}
 }

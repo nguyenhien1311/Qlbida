@@ -16,11 +16,15 @@ namespace QlBida
         BidaDataContext bida;
         BidaTable tb;
         Timer timer;
+        Color c;
+        OrderTable order;
+        public List<TableService> lstSv;
 
         public frmTable()
         {
             InitializeComponent();
             bida = new BidaDataContext();
+            lstSv = new List<TableService>();
             btnUpdateTable.Enabled = false;
             btnStartTime.Enabled = false;
             btnEndTime.Enabled = false;
@@ -35,7 +39,7 @@ namespace QlBida
 
         private void LoadTable()
         {
-            
+
             bida = new BidaDataContext();
             flpTableList.Controls.Clear();
             var lstTable = from t in bida.BidaTables
@@ -68,10 +72,10 @@ namespace QlBida
                 switch (status)
                 {
                     case "Trống":
-                        btn.BackColor = Color.LimeGreen;
+                        c = btn.BackColor = Color.LimeGreen;
                         break;
                     default:
-                        btn.BackColor = Color.OrangeRed;
+                        c = btn.BackColor = Color.OrangeRed;
                         break;
                 }
                 btn.Text = table.Name + Environment.NewLine + Environment.NewLine + table.CatName + Environment.NewLine + Environment.NewLine + status;
@@ -85,13 +89,36 @@ namespace QlBida
             tb = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
             txtTableName.Text = tb.TableName;
             txtTablePrice.Text = tb.Price.ToString();
+            txtTiming.Text = TimeSpan.FromSeconds(Convert.ToDouble(tb.PlayTime)).ToString();
+        }
 
-            txtTiming.Text =TimeSpan.FromMinutes(Convert.ToDouble(tb.PlayTime)).ToString();
+        void LoadOrderOfTb(int id)
+        {
+            var table = bida.BidaTables.SingleOrDefault(x=>x.TableId == id);
+            var thisTbOrd = from ord in bida.OrderTables
+                            where ord.TableId == table.TableId && ord.OrdStatus == 0
+                            select ord;
+            if (thisTbOrd != null)
+            {
+                foreach (var item in thisTbOrd)
+                {
+                    var lstDetails = bida.OrdDetails.Where(x => x.OrderId == item.OrderId).ToList();
+                    if (lstDetails != null)
+                    {
+                        dgvSerive.Rows.Clear();
+                        foreach (var svitem in lstSv)
+                        {
+                            dgvSerive.Rows.Add(new object[] { svitem.SvId, svitem.SvName, svitem.Quantity });
+                        }
+                    }
+                }
+            }
         }
 
         void btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
+            c = btn.BackColor;
             btn.BackColor = Color.RoyalBlue;
             var table = btn.Tag as BidaTable;
             id = table.TableId;
@@ -99,19 +126,37 @@ namespace QlBida
             btnStartTime.Enabled = true;
             btnAddService.Enabled = true;
             TableDetails(id);
+            LoadOrderOfTb(id);
         }
 
         void btn_Leave(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            btn.BackColor = Color.LimeGreen;
+            btn.BackColor = c;
         }
 
         private void btnAddService_Click(object sender, EventArgs e)
         {
             frmAddService frm = new frmAddService();
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.Show();
+            frm.services = lstSv;
+            var result = frm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                lstSv = frm.services;
+            }
+            foreach (var item in lstSv)
+            {
+                OrdDetail detail = new OrdDetail()
+                {
+                    OrderId = order.OrderId,
+                    SvId = item.SvId,
+                    Quantity = item.Quantity,
+                    Price = (item.Quantity * item.Price)
+                };
+                bida.OrdDetails.InsertOnSubmit(detail);
+            }
+            bida.SubmitChanges();
         }
 
         private void btnNewTable_Click(object sender, EventArgs e)
@@ -137,21 +182,28 @@ namespace QlBida
         {
             timer.Stop();
             tb.EndTime = DateTime.Now;
-            MessageBox.Show(tb.StartTime.ToString() + Environment.NewLine + tb.EndTime.ToString());
-            OrderTable order = new OrderTable();
-            order.TableId = tb.TableId;
-            order.StartTime = tb.StartTime;
-            order.EndTime = tb.EndTime;
-            order.PlayTime = tb.PlayTime;
+            var ord = bida.OrderTables.SingleOrDefault(x=>x.OrderId == order.OrderId);
+            ord.EndTime = tb.EndTime;
+            ord.PlayTime = tb.PlayTime;
             if (txtSurcharge.Text != "")
             {
 
-                order.Surcharge = Convert.ToDouble(txtSurcharge.Text);
+                ord.Surcharge = Convert.ToDouble(txtSurcharge.Text);
             }
             else
             {
-                order.Surcharge = 0;
+                ord.Surcharge = 0;
             }
+            ord.OrdStatus = 1;
+            bida.SubmitChanges();
+            var table = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
+            table.StartTime = null;
+            table.EndTime = null;
+            table.StartTime = null;
+            table.PlayTime = null;
+            table.TableStatus = 1;
+            bida.SubmitChanges();
+            LoadTable();
             frmChoosePay frm = new frmChoosePay(order);
             frm.Show();
         }
@@ -160,56 +212,76 @@ namespace QlBida
         {
             btnStartTime.Enabled = false;
             btnEndTime.Enabled = true;
-            tb.StartTime = DateTime.Now;
+            var table = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
+            table.StartTime = DateTime.Now;
             timer = new Timer();
             timer.Interval = 1000;
             timer.Tick += timer_Tick;
             timer.Start();
+            table.TableStatus = 0;
+            bida.SubmitChanges();
+            order = new OrderTable();
+            order.TableId = table.TableId;
+            order.StartTime = table.StartTime;
+            order.OrdStatus = 0;
+            bida.OrderTables.InsertOnSubmit(order);
+            bida.SubmitChanges();
+            LoadTable();
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if (tb.PlayTime == null)
+            if (tb.StartTime != null)
             {
-                var time = DateTime.Now - tb.StartTime;
-                if (time != null)
+                if (tb.PlayTime == null)
                 {
-                    if (time.Value.TotalMinutes >= 1)
+                    TimeSpan time = (TimeSpan)(DateTime.Now - tb.StartTime);
+
+                    if (time != null)
                     {
-                        tb.PlayTime = (int)time.Value.TotalMinutes;
-                        bida.SubmitChanges();
+                        if (time.TotalMinutes >= 1)
+                        {
+                            tb.PlayTime = (int)time.TotalMinutes;
+                            bida.SubmitChanges();
+                        }
+                        txtTiming.Text = TimeSpan.FromSeconds(time.TotalMinutes).ToString();
                     }
-                    txtTiming.Text = TimeSpan.FromMinutes(time.Value.TotalMinutes).ToString();
+                    else
+                    {
+                        txtTiming.Text = TimeSpan.FromSeconds(0.0).ToString();
+                    }
                 }
                 else
                 {
-                    txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
+                    TimeSpan time = (TimeSpan)(DateTime.Now - tb.StartTime);
+                    if (time != null)
+                    {
+                        double ptime = (double)tb.PlayTime;
+                        if (time.TotalMinutes >= 1)
+                        {
+                            tb.PlayTime = (int)time.TotalMinutes;
+                            bida.SubmitChanges();
+                        }
+                        txtTiming.Text = TimeSpan.FromSeconds(time.TotalMinutes + ptime).ToString();
+                    }
+                    else
+                    {
+                        txtTiming.Text = TimeSpan.FromSeconds(0.0).ToString();
+                    }
                 }
             }
             else
             {
-                var time = DateTime.Now - tb.StartTime;
-                if (time != null)
-                {
-                    double ptime = (double)tb.PlayTime;
-                    if (time.Value.TotalMinutes >= 1)
-                    {
-                        tb.PlayTime = (int)time.Value.TotalMinutes;
-                        bida.SubmitChanges();
-                    }
-                    txtTiming.Text = TimeSpan.FromMinutes(time.Value.TotalMinutes+ ptime).ToString();
-                }
-                else
-                {
-                    txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
-                }
+                txtTiming.Text = TimeSpan.FromSeconds(0.0).ToString();
             }
+
         }
 
         private void btnChangeTable_Click(object sender, EventArgs e)
         {
             frmChangeTable frm = new frmChangeTable(tb);
             frm.Show();
+            LoadTable();
         }
     }
 }

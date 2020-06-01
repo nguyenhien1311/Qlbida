@@ -41,9 +41,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvSerive = new System.Windows.Forms.DataGridView();
-            this.SvId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTiming = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnChangeTable = new System.Windows.Forms.Button();
@@ -51,6 +48,9 @@
             this.btnNewTable = new System.Windows.Forms.Button();
             this.btnUpdateTable = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.SvId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -182,26 +182,6 @@
             this.dgvSerive.Size = new System.Drawing.Size(274, 194);
             this.dgvSerive.TabIndex = 15;
             // 
-            // SvId
-            // 
-            this.SvId.HeaderText = "Mã ";
-            this.SvId.Name = "SvId";
-            this.SvId.ReadOnly = true;
-            this.SvId.Width = 50;
-            // 
-            // SvName
-            // 
-            this.SvName.HeaderText = "DV";
-            this.SvName.Name = "SvName";
-            this.SvName.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            this.Quantity.HeaderText = "Số lượng";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            this.Quantity.Width = 80;
-            // 
             // txtTiming
             // 
             this.txtTiming.Location = new System.Drawing.Point(654, 135);
@@ -268,6 +248,29 @@
             this.btnRefresh.Text = "Làm mới";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // SvId
+            // 
+            this.SvId.DataPropertyName = "SvId";
+            this.SvId.HeaderText = "Mã ";
+            this.SvId.Name = "SvId";
+            this.SvId.ReadOnly = true;
+            this.SvId.Width = 50;
+            // 
+            // SvName
+            // 
+            this.SvName.DataPropertyName = "SvName";
+            this.SvName.HeaderText = "DV";
+            this.SvName.Name = "SvName";
+            this.SvName.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            this.Quantity.HeaderText = "Số lượng";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 80;
             // 
             // frmTable
             // 

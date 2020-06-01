@@ -37,12 +37,12 @@
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvServiceAdded = new System.Windows.Forms.DataGridView();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.mnrQuantity = new System.Windows.Forms.NumericUpDown();
-            this.btnOk = new System.Windows.Forms.Button();
             this.SvIdAdd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SvNameAdd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SvQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.mnrQuantity = new System.Windows.Forms.NumericUpDown();
+            this.btnOk = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvService)).BeginInit();
@@ -140,8 +140,31 @@
             this.dgvServiceAdded.Location = new System.Drawing.Point(3, 16);
             this.dgvServiceAdded.Name = "dgvServiceAdded";
             this.dgvServiceAdded.ReadOnly = true;
+            this.dgvServiceAdded.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvServiceAdded.Size = new System.Drawing.Size(362, 425);
             this.dgvServiceAdded.TabIndex = 0;
+            // 
+            // SvIdAdd
+            // 
+            this.SvIdAdd.DataPropertyName = "SvId";
+            this.SvIdAdd.HeaderText = "Mã";
+            this.SvIdAdd.Name = "SvIdAdd";
+            this.SvIdAdd.ReadOnly = true;
+            // 
+            // SvNameAdd
+            // 
+            this.SvNameAdd.DataPropertyName = "SvName";
+            this.SvNameAdd.HeaderText = "DV";
+            this.SvNameAdd.Name = "SvNameAdd";
+            this.SvNameAdd.ReadOnly = true;
+            this.SvNameAdd.Width = 120;
+            // 
+            // SvQuantity
+            // 
+            this.SvQuantity.DataPropertyName = "Quantity";
+            this.SvQuantity.HeaderText = "Số lượng";
+            this.SvQuantity.Name = "SvQuantity";
+            this.SvQuantity.ReadOnly = true;
             // 
             // btnAdd
             // 
@@ -178,25 +201,7 @@
             this.btnOk.TabIndex = 4;
             this.btnOk.Text = "Xong";
             this.btnOk.UseVisualStyleBackColor = true;
-            // 
-            // SvIdAdd
-            // 
-            this.SvIdAdd.HeaderText = "Mã";
-            this.SvIdAdd.Name = "SvIdAdd";
-            this.SvIdAdd.ReadOnly = true;
-            // 
-            // SvNameAdd
-            // 
-            this.SvNameAdd.HeaderText = "DV";
-            this.SvNameAdd.Name = "SvNameAdd";
-            this.SvNameAdd.ReadOnly = true;
-            this.SvNameAdd.Width = 120;
-            // 
-            // SvQuantity
-            // 
-            this.SvQuantity.HeaderText = "Số lượng";
-            this.SvQuantity.Name = "SvQuantity";
-            this.SvQuantity.ReadOnly = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnDelete
             // 
@@ -206,6 +211,7 @@
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmAddService
             // 
@@ -244,9 +250,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SvCatName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn SvIdAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn SvNameAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn SvQuantity;
-        private System.Windows.Forms.Button btnDelete;
     }
 }

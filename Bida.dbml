@@ -37,8 +37,8 @@
   </Table>
   <Table Name="dbo.OrdDetail" Member="OrdDetails">
     <Type Name="OrdDetail">
-      <Column Name="OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SvId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SvId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="OrderTable_OrdDetail" Member="OrderTable" ThisKey="OrderId" OtherKey="OrderId" Type="OrderTable" IsForeignKey="true" />
@@ -61,11 +61,11 @@
       <Association Name="BidaTable_OrderTable" Member="BidaTable" ThisKey="TableId" OtherKey="TableId" Type="BidaTable" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TableCategory" Member="TableCategories">
-    <Type Name="TableCategory">
-      <Column Name="TableCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TableCatName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="TableCategory_BidaTable" Member="BidaTables" ThisKey="TableCatId" OtherKey="TableCatID" Type="BidaTable" />
+  <Table Name="dbo.ServiceCategory" Member="ServiceCategories">
+    <Type Name="ServiceCategory">
+      <Column Name="SvCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SvCatName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="ServiceCategory_TableService" Member="TableServices" ThisKey="SvCatId" OtherKey="SvCatId" Type="TableService" />
     </Type>
   </Table>
   <Table Name="dbo.TableService" Member="TableServices">
@@ -79,11 +79,11 @@
       <Association Name="ServiceCategory_TableService" Member="ServiceCategory" ThisKey="SvCatId" OtherKey="SvCatId" Type="ServiceCategory" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ServiceCategory" Member="ServiceCategories">
-    <Type Name="ServiceCategory">
-      <Column Name="SvCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="SvCatName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Association Name="ServiceCategory_TableService" Member="TableServices" ThisKey="SvCatId" OtherKey="SvCatId" Type="TableService" />
+  <Table Name="dbo.TableCategory" Member="TableCategories">
+    <Type Name="TableCategory">
+      <Column Name="TableCatId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TableCatName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TableCategory_BidaTable" Member="BidaTables" ThisKey="TableCatId" OtherKey="TableCatID" Type="BidaTable" />
     </Type>
   </Table>
 </Database>

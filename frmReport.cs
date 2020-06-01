@@ -24,8 +24,8 @@ namespace QlBida
         private void btnOrderDetails_Click(object sender, EventArgs e)
         {
             var row = dgvOrderList.CurrentRow;
-            int id = (int) row.Cells[0].Value;
-            var order = db.OrderTables.SingleOrDefault(x=>x.OrderId == id);
+            int id = (int)row.Cells[0].Value;
+            var order = db.OrderTables.SingleOrDefault(x => x.OrderId == id);
             frmOrderDetails frm = new frmOrderDetails(order);
             frm.Show();
         }
@@ -40,6 +40,7 @@ namespace QlBida
             var data = from o in db.OrderTables
                        join c in db.Customers on o.CusId equals c.CusId
                        join tb in db.BidaTables on o.TableId equals tb.TableId
+                       where o.OrdStatus == 0
                        select new
                        {
                            OrderId = o.OrderId,

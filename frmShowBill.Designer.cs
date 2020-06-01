@@ -52,6 +52,10 @@
             this.lblDiscount = new System.Windows.Forms.Label();
             this.btnPayBill = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.SvId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvService)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -103,10 +107,18 @@
             // 
             // dgvService
             // 
+            this.dgvService.AllowUserToAddRows = false;
+            this.dgvService.AllowUserToDeleteRows = false;
             this.dgvService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvService.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SvId,
+            this.SvName,
+            this.Quantity,
+            this.Price});
             this.dgvService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvService.Location = new System.Drawing.Point(3, 16);
             this.dgvService.Name = "dgvService";
+            this.dgvService.ReadOnly = true;
             this.dgvService.Size = new System.Drawing.Size(617, 156);
             this.dgvService.TabIndex = 5;
             // 
@@ -284,6 +296,34 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // SvId
+            // 
+            this.SvId.DataPropertyName = "SvId";
+            this.SvId.HeaderText = "Mã DV";
+            this.SvId.Name = "SvId";
+            this.SvId.ReadOnly = true;
+            // 
+            // SvName
+            // 
+            this.SvName.DataPropertyName = "SvName";
+            this.SvName.HeaderText = "DV";
+            this.SvName.Name = "SvName";
+            this.SvName.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            this.Quantity.HeaderText = "Số lượng";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "Price";
+            this.Price.HeaderText = "Giá tiền";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
             // frmShowBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,5 +390,9 @@
         private System.Windows.Forms.Label lblDiscount;
         private System.Windows.Forms.Button btnPayBill;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SvId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SvName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
     }
 }

@@ -123,6 +123,7 @@ OrderId int foreign key references OrderTable(OrderId),
 SvId  int foreign key references TableService(SvId),
 Quantity int,
 Price float
+PRIMARY KEY (OrderId,SvId)
 )	
 GO
 
@@ -146,3 +147,5 @@ INSERT INTO ACCOUNT VALUES
 GO
 
 select * from BidaTable
+select * from OrderTable 
+select * from OrdDetail 

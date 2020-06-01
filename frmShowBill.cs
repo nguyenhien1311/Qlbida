@@ -15,6 +15,13 @@ namespace QlBida
         BidaDataContext db;
         OrderTable ord;
         Customer cus;
+        double totalSvPrice = 0;
+        double afterDiscount = 0;
+        int discount = 0;
+        double total = 0;
+        double time = 0;
+        double price;
+        BidaTable tb;
         public frmShowBill(Customer customer, OrderTable order)
         {
             InitializeComponent();
@@ -32,6 +39,13 @@ namespace QlBida
 
         private void btnPayBill_Click(object sender, EventArgs e)
         {
+            var o = db.OrderTables.SingleOrDefault(x => x.OrderId == ord.OrderId);
+            if (cus != null)
+            {
+                o.CusId = cus.CusId;
+            }
+            o.Price = afterDiscount;
+            db.SubmitChanges();
             this.Close();
         }
 
@@ -42,23 +56,16 @@ namespace QlBida
 
         private void frmShowBill_Load(object sender, EventArgs e)
         {
-            LoadDetails();
             LoadServices();
+            LoadDetails();
         }
 
         void LoadDetails()
         {
-            int discount = 0;
-            var tb = db.BidaTables.SingleOrDefault(x => x.TableId == ord.TableId);
-            lblTableName.Text = tb.TableName;
-            lblEndTime.Text = ord.EndTime.ToString();
-            lblStartTime.Text = ord.StartTime.ToString();
-            double time = (double)(ord.PlayTime / 60);
-            lblTotalTime.Text = time.ToString();
-            lblSurchagre.Text = ord.Surcharge.ToString();
-            double price = time * (double)tb.Price;
-            lblCaculatePrice.Text = time + " X " + tb.Price + " = " + price;
-            lblPricePlay.Text = price.ToString();
+            var order = db.OrderTables.SingleOrDefault(x=>x.OrderId == ord.OrderId);
+            tb = db.BidaTables.SingleOrDefault(x => x.TableId == ord.TableId);
+            time = (double)(order.PlayTime / 60);
+            price = time * (double)tb.Price;
             if (cus != null)
             {
                 if (cus.CusLevel == 3)
@@ -86,14 +93,35 @@ namespace QlBida
             {
                 lblDiscount.Text = discount.ToString();
             }
-            double total = (double)((price + ord.Surcharge) * discount / 100);
-            lblTotalPrice.Text = total.ToString();
+            total = (double)(price + order.Surcharge + totalSvPrice);
+            afterDiscount = total - (total * discount / 100);
+            lblTableName.Text = tb.TableName;
+            lblEndTime.Text = order.EndTime.ToString();
+            lblStartTime.Text = order.StartTime.ToString();
+            lblTotalTime.Text = time.ToString();
+            lblSurchagre.Text = order.Surcharge.ToString();
+            lblCaculatePrice.Text = time + " X " + tb.Price + " = " + price;
+            lblPricePlay.Text = price.ToString();
+            lblTotalPrice.Text = afterDiscount.ToString();
         }
 
-        void LoadServices() {
+        void LoadServices()
+        {
             var data = from dt in db.OrdDetails
+                       join sv in db.TableServices on dt.SvId equals sv.SvId
                        where dt.OrderId == ord.OrderId
-                       select dt;
+                       select new
+                       {
+                           SvId = dt.SvId,
+                           SvName = sv.SvName,
+                           Quantity = dt.Quantity,
+                           Price = dt.Price
+                       };
+            foreach (var item in data)
+            {
+                totalSvPrice += (double)item.Price;
+            }
+            lblServicePrice.Text = totalSvPrice.ToString();
             dgvService.DataSource = data;
         }
     }

@@ -41,11 +41,16 @@ namespace QlBida
             int id = (cbxTable.SelectedItem as BidaTable).TableId;
             var tbChange = db.BidaTables.SingleOrDefault(x=>x.TableId == id);
             tbChange.StartTime = tb.StartTime;
-            tb.StartTime = null;
             tbChange.PlayTime = tb.PlayTime;
-            tb.PlayTime = null;
             tbChange.TableStatus = 0;
-            tb.TableStatus = 1; 
+            db.SubmitChanges();
+            var thisTbOrd = db.OrderTables.SingleOrDefault(x => x.TableId == tb.TableId);
+            thisTbOrd.TableId = tbChange.TableId;
+            db.SubmitChanges();
+            var table = db.BidaTables.SingleOrDefault(x=>x.TableId == tb.TableId);
+            table.PlayTime = null;
+            table.StartTime = null;
+            table.TableStatus = 1;
             db.SubmitChanges();
         }
 
