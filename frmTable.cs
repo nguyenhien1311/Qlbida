@@ -90,14 +90,16 @@ namespace QlBida
             txtTableName.Text = tb.TableName;
             txtTablePrice.Text = tb.Price.ToString();
             txtTiming.Text = TimeSpan.FromSeconds(Convert.ToDouble(tb.PlayTime)).ToString();
+            var thisTbOrd = bida.OrderTables.FirstOrDefault(x => x.TableId == tb.TableId);
+            if (thisTbOrd != null)
+                txtSurcharge.Text = thisTbOrd.Surcharge.ToString();
+            else
+                txtSurcharge.Text = "";
         }
 
         void LoadOrderOfTb(int id)
         {
-            var table = bida.BidaTables.SingleOrDefault(x=>x.TableId == id);
-            var thisTbOrd = from ord in bida.OrderTables
-                            where ord.TableId == table.TableId && ord.OrdStatus == 0
-                            select ord;
+            var thisTbOrd = bida.OrderTables.Where(x => x.TableId == id && x.OrdStatus == 0);
             if (thisTbOrd != null)
             {
                 foreach (var item in thisTbOrd)
@@ -133,6 +135,7 @@ namespace QlBida
         {
             Button btn = sender as Button;
             btn.BackColor = c;
+            dgvSerive.Rows.Clear();
         }
 
         private void btnAddService_Click(object sender, EventArgs e)
@@ -176,13 +179,14 @@ namespace QlBida
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadTable();
+            dgvSerive.Rows.Clear();
         }
 
         private void btnEndTime_Click(object sender, EventArgs e)
         {
             timer.Stop();
             tb.EndTime = DateTime.Now;
-            var ord = bida.OrderTables.SingleOrDefault(x=>x.OrderId == order.OrderId);
+            var ord = bida.OrderTables.SingleOrDefault(x => x.OrderId == order.OrderId);
             ord.EndTime = tb.EndTime;
             ord.PlayTime = tb.PlayTime;
             if (txtSurcharge.Text != "")
@@ -235,6 +239,7 @@ namespace QlBida
             {
                 if (tb.PlayTime == null)
                 {
+                    btnStartTime.Enabled = false;
                     TimeSpan time = (TimeSpan)(DateTime.Now - tb.StartTime);
 
                     if (time != null)
@@ -253,6 +258,7 @@ namespace QlBida
                 }
                 else
                 {
+                    btnStartTime.Enabled = false;
                     TimeSpan time = (TimeSpan)(DateTime.Now - tb.StartTime);
                     if (time != null)
                     {
@@ -280,8 +286,23 @@ namespace QlBida
         private void btnChangeTable_Click(object sender, EventArgs e)
         {
             frmChangeTable frm = new frmChangeTable(tb);
-            frm.Show();
-            LoadTable();
+            var result = frm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                LoadTable();
+            }
+        }
+
+        private void txtSurcharge_TextChanged(object sender, EventArgs e)
+        {
+            if (order != null)
+            {
+                if (!String.IsNullOrEmpty(txtSurcharge.Text) || !String.IsNullOrWhiteSpace(txtSurcharge.Text))
+                {
+                    order.Surcharge = Convert.ToInt32(txtSurcharge.Text);
+                    bida.SubmitChanges();
+                }
+            }
         }
     }
 }

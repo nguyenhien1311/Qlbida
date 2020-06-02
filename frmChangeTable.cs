@@ -27,7 +27,8 @@ namespace QlBida
             LoadTable();
         }
 
-        void LoadTable(){
+        void LoadTable()
+        {
             var data = from t in db.BidaTables
                        where t.TableStatus == 1
                        select t;
@@ -38,24 +39,30 @@ namespace QlBida
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            int id = (cbxTable.SelectedItem as BidaTable).TableId;
-            var tbChange = db.BidaTables.SingleOrDefault(x=>x.TableId == id);
-            tbChange.StartTime = tb.StartTime;
-            tbChange.PlayTime = tb.PlayTime;
-            tbChange.TableStatus = 0;
-            db.SubmitChanges();
             var thisTbOrd = db.OrderTables.SingleOrDefault(x => x.TableId == tb.TableId);
-            thisTbOrd.TableId = tbChange.TableId;
-            db.SubmitChanges();
-            var table = db.BidaTables.SingleOrDefault(x=>x.TableId == tb.TableId);
-            table.PlayTime = null;
-            table.StartTime = null;
-            table.TableStatus = 1;
-            db.SubmitChanges();
+            if (thisTbOrd != null)
+            {
+                int id = (cbxTable.SelectedItem as BidaTable).TableId;
+                var tbChange = db.BidaTables.SingleOrDefault(x => x.TableId == id);
+                tbChange.StartTime = tb.StartTime;
+                tbChange.PlayTime = tb.PlayTime;
+                tbChange.TableStatus = 0;
+                db.SubmitChanges();
+                thisTbOrd.TableId = tbChange.TableId;
+                db.SubmitChanges();
+                var table = db.BidaTables.SingleOrDefault(x => x.TableId == tb.TableId);
+                table.PlayTime = null;
+                table.StartTime = null;
+                table.TableStatus = 1;
+                db.SubmitChanges();
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }

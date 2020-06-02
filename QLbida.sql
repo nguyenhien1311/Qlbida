@@ -147,5 +147,5 @@ INSERT INTO ACCOUNT VALUES
 GO
 
 select * from BidaTable
-select * from OrderTable 
+select * from OrderTable
 select * from OrdDetail 

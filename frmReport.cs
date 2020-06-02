@@ -40,7 +40,7 @@ namespace QlBida
             var data = from o in db.OrderTables
                        join c in db.Customers on o.CusId equals c.CusId
                        join tb in db.BidaTables on o.TableId equals tb.TableId
-                       where o.OrdStatus == 0
+                       where o.OrdStatus == 1
                        select new
                        {
                            OrderId = o.OrderId,
@@ -56,6 +56,37 @@ namespace QlBida
                            OrdStatus = o.OrdStatus
                        };
             dgvOrderList.DataSource = data;
+        }
+
+        private void btnFillByDate_Click(object sender, EventArgs e)
+        {
+            var lstOrder = from o in db.OrderTables
+                           join c in db.Customers on o.CusId equals c.CusId
+                           join tb in db.BidaTables on o.TableId equals tb.TableId
+                           where o.OrdStatus == 1 && o.StartTime.Value.Date == dtpDateToFill.Value.Date
+                           select new
+                           {
+                               OrderId = o.OrderId,
+                               CusId = o.CusId,
+                               CusName = c.CusName,
+                               TableId = o.TableId,
+                               TableName = tb.TableName,
+                               StartTime = o.StartTime,
+                               EndTime = o.EndTime,
+                               PlayTime = o.PlayTime,
+                               Surcharge = o.Surcharge,
+                               Price = o.Price,
+                               OrdStatus = o.OrdStatus
+                           };
+            dgvOrderList.DataSource = lstOrder;
+        }
+
+        private void dgvOrderList_VisibleChanged(object sender, EventArgs e)
+        {
+            if (dgvOrderList.CurrentRow != null)
+            {
+                btnOrderDetails.Enabled = true;
+            }
         }
     }
 }

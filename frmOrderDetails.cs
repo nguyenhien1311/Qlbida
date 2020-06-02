@@ -24,6 +24,26 @@ namespace QlBida
 
         private void frmOrderDetails_Load(object sender, EventArgs e)
         {
+            LoadInfo();
+            LoadDetails();
+        }
+        void LoadDetails()
+        {
+            var details = from dt in db.OrdDetails
+                          join sv in db.TableServices on dt.SvId equals sv.SvId
+                          where dt.OrderId == ord.OrderId
+                          select new
+                          {
+                              SvId = dt.SvId,
+                              SvName = sv.SvName,
+                              Quantity = dt.Quantity,
+                              Price = dt.Price
+                          };
+            dgvDetails.DataSource = details;
+        }
+
+        void LoadInfo()
+        {
             var data = from o in db.OrderTables
                        join c in db.Customers on o.CusId equals c.CusId
                        join tb in db.BidaTables on o.TableId equals tb.TableId
@@ -54,11 +74,7 @@ namespace QlBida
             txtTotalPrice.Text = thisOrd.Price.ToString();
             txtSurcharge.Text = thisOrd.Surcharge.ToString();
             txtPlayingTime.Text = thisOrd.PlayTime.ToString();
+        }
 
-        }
-        void LoadDetails()
-        {
-            var details = db.OrdDetails.Where(x => x.OrderId == ord.OrderId);
-        }
     }
 }

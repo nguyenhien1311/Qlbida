@@ -44,5 +44,14 @@ namespace QlBida
                        select c;
             dgvCusList.DataSource = data;
         }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            var data = db.Accounts.Where(x=>x.Name.ToLower().Contains(txtName.Text.ToLower()));
+            if (data != null)
+            {
+                dgvCusList.DataSource = data;
+            }
+        }
     }
 }

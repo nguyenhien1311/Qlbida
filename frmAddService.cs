@@ -52,20 +52,31 @@ namespace QlBida
                 var row = dgvService.CurrentRow;
                 int id = (int)row.Cells[0].Value;
                 var sv = db.TableServices.SingleOrDefault(x => x.SvId == id);
-                sv.Quantity = (int)mnrQuantity.Value;
-                if (!services.Any(x => x.SvId == id))
+                if (mnrQuantity.Value <= sv.Quantity)
                 {
-                    services.Add(sv);
+                    TableService tbsv = new TableService();
+                    tbsv.SvId = sv.SvId;
+                    tbsv.SvName = sv.SvName;
+                    tbsv.Price = sv.Price;
+                    tbsv.Quantity = (int)mnrQuantity.Value;
+                    if (!services.Any(x => x.SvId == id))
+                    {
+                        services.Add(tbsv);
+                    }
+                    else
+                    {
+                        services.SingleOrDefault(x => x.SvId == id).Quantity += tbsv.Quantity;
+                    }
+                    sv.Quantity -= tbsv.Quantity;
+                    db.SubmitChanges();
+                    LoadService();
+                    LoadSVAdded();
                 }
                 else
                 {
-                    services.SingleOrDefault(x => x.SvId == id).Quantity += sv.Quantity;
+                    MessageBox.Show("So luong SP khong du");
+                    mnrQuantity.Focus();
                 }
-                var serv = db.TableServices.SingleOrDefault(x => x.SvId == id);
-                serv.Quantity -= (int)mnrQuantity.Value;
-                db.SubmitChanges();
-                LoadService();
-                LoadSVAdded();
             }
         }
 
@@ -85,8 +96,11 @@ namespace QlBida
                 var row = dgvServiceAdded.CurrentRow;
                 int id = (int)row.Cells[0].Value;
                 var sv = db.TableServices.SingleOrDefault(x => x.SvId == id);
+
                 var svAdded = services.SingleOrDefault(x => x.SvId == id);
                 sv.Quantity += svAdded.Quantity;
+                db.SubmitChanges();
+
                 services.RemoveAll(x => x.SvId == id);
                 LoadService();
                 LoadSVAdded();
