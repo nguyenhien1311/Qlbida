@@ -98,7 +98,6 @@ namespace QlBida
                 }
                 else
                 {
-
                     MessageBox.Show("Email này đã tồn tại", "Thêm NV", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtAccEmail.Clear(); txtAccEmail.Focus();
                 }
