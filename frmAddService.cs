@@ -47,8 +47,9 @@ namespace QlBida
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (dgvService.CurrentRow != null)
+            if (dgvService.CurrentRow != null && mnrQuantity.Value >0)
             {
+                
                 var row = dgvService.CurrentRow;
                 int id = (int)row.Cells[0].Value;
                 var sv = db.TableServices.SingleOrDefault(x => x.SvId == id);
@@ -74,9 +75,14 @@ namespace QlBida
                 }
                 else
                 {
-                    MessageBox.Show("So luong SP khong du");
+                    MessageBox.Show("Số lượng không hợp lệ");
                     mnrQuantity.Focus();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Số lượng phải lớn hơn 0");
+                mnrQuantity.Focus();
             }
         }
 

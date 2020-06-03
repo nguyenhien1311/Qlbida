@@ -12,6 +12,7 @@ namespace QlBida
 {
     public partial class frmAccount : Form
     {
+        public Account Acc { get; set; }
         private bool edit = true;
         private BidaDataContext db;
         public frmAccount()
@@ -23,6 +24,10 @@ namespace QlBida
         private void frmAccount_Load(object sender, EventArgs e)
         {
             LoadAccount();
+            if (Acc.AccLevel< 2)
+            {
+                btnLevelUp.Enabled = false;
+            }
         }
 
         private void LoadAccount()
@@ -77,16 +82,27 @@ namespace QlBida
             }
             else
             {
-                Account acc = new Account();
-                acc.Name = txtAccName.Text;
-                acc.Email = txtAccEmail.Text;
-                acc.Phone = txtAccPhone.Text;
-                acc.UserName = txtUserName.Text;
-                acc.Password = txtPassword.Text;
-                acc.AccLevel = 1;
-                db.Accounts.InsertOnSubmit(acc);
-                db.SubmitChanges();
-                LoadAccount();
+                var accChk = db.Accounts.SingleOrDefault(x =>x.AccLevel != 0 && x.Email.ToLower().Equals(txtAccEmail.Text.ToLower()) );
+                if (accChk==null)
+                {
+                    Account acc = new Account();
+                    acc.Name = txtAccName.Text;
+                    acc.Email = txtAccEmail.Text;
+                    acc.Phone = txtAccPhone.Text;
+                    acc.UserName = txtUserName.Text;
+                    acc.Password = txtPassword.Text;
+                    acc.AccLevel = 1;
+                    db.Accounts.InsertOnSubmit(acc);
+                    db.SubmitChanges();
+                    LoadAccount();
+                }
+                else
+                {
+
+                    MessageBox.Show("Email này đã tồn tại", "Thêm NV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtAccEmail.Clear(); txtAccEmail.Focus();
+                }
+
             }
         }
 

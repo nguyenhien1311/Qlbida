@@ -26,7 +26,7 @@ namespace QlBida
             var cat = db.ServiceCategories.SingleOrDefault(x => x.SvCatName.ToLower().Equals(name.ToLower()));
             if (cat != null)
             {
-                MessageBox.Show("Loai da ton tai");
+                MessageBox.Show("Loại DV đã tồn tại");
                 txtCatName.Clear();
                 txtCatName.Focus();
             }

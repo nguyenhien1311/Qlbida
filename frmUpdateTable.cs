@@ -62,10 +62,11 @@ namespace QlBida
             updateTb.Price = Convert.ToDouble(txtPrice.Text);
             updateTb.TableStatus = 1;
             db.SubmitChanges();
-            if (MessageBox.Show("Sua thanh cong", "Sua thong tin ban", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+            if (MessageBox.Show("Sửa thành công", "Sửa thông tin bàn ", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
             {
                 this.Close();
             }
         }
+        
     }
 }

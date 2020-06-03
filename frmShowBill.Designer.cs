@@ -51,11 +51,10 @@
             this.lblSurchagre = new System.Windows.Forms.Label();
             this.lblDiscount = new System.Windows.Forms.Label();
             this.btnPayBill = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.SvId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SvPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvService)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +113,7 @@
             this.SvId,
             this.SvName,
             this.Quantity,
-            this.Price});
+            this.SvPrice});
             this.dgvService.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvService.Location = new System.Drawing.Point(3, 16);
             this.dgvService.Name = "dgvService";
@@ -278,23 +277,13 @@
             // 
             // btnPayBill
             // 
-            this.btnPayBill.Location = new System.Drawing.Point(355, 532);
+            this.btnPayBill.Location = new System.Drawing.Point(242, 523);
             this.btnPayBill.Name = "btnPayBill";
-            this.btnPayBill.Size = new System.Drawing.Size(100, 25);
+            this.btnPayBill.Size = new System.Drawing.Size(152, 33);
             this.btnPayBill.TabIndex = 22;
             this.btnPayBill.Text = "Thanh toán";
             this.btnPayBill.UseVisualStyleBackColor = true;
             this.btnPayBill.Click += new System.EventHandler(this.btnPayBill_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(504, 532);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 25);
-            this.btnCancel.TabIndex = 23;
-            this.btnCancel.Text = "Quay lại";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // SvId
             // 
@@ -309,6 +298,7 @@
             this.SvName.HeaderText = "DV";
             this.SvName.Name = "SvName";
             this.SvName.ReadOnly = true;
+            this.SvName.Width = 200;
             // 
             // Quantity
             // 
@@ -316,20 +306,21 @@
             this.Quantity.HeaderText = "Số lượng";
             this.Quantity.Name = "Quantity";
             this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 125;
             // 
-            // Price
+            // SvPrice
             // 
-            this.Price.DataPropertyName = "Price";
-            this.Price.HeaderText = "Giá tiền";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
+            this.SvPrice.DataPropertyName = "Price";
+            this.SvPrice.HeaderText = "Giá";
+            this.SvPrice.Name = "SvPrice";
+            this.SvPrice.ReadOnly = true;
+            this.SvPrice.Width = 145;
             // 
             // frmShowBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 578);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnPayBill);
             this.Controls.Add(this.lblDiscount);
             this.Controls.Add(this.lblSurchagre);
@@ -389,10 +380,9 @@
         private System.Windows.Forms.Label lblSurchagre;
         private System.Windows.Forms.Label lblDiscount;
         private System.Windows.Forms.Button btnPayBill;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn SvId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SvPrice;
     }
 }

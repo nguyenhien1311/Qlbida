@@ -30,6 +30,12 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvOrderList = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpDateToFill = new System.Windows.Forms.DateTimePicker();
+            this.btnFillByDate = new System.Windows.Forms.Button();
+            this.btnOrderDetails = new System.Windows.Forms.Button();
+            this.btnExportReport = new System.Windows.Forms.Button();
+            this.btnChangeSource = new System.Windows.Forms.Button();
             this.OrdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,11 +47,6 @@
             this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtpDateToFill = new System.Windows.Forms.DateTimePicker();
-            this.btnFillByDate = new System.Windows.Forms.Button();
-            this.btnOrderDetails = new System.Windows.Forms.Button();
-            this.btnExportReport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderList)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +87,64 @@
             this.dgvOrderList.TabIndex = 0;
             this.dgvOrderList.VisibleChanged += new System.EventHandler(this.dgvOrderList_VisibleChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(442, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Lọc theo ngày";
+            // 
+            // dtpDateToFill
+            // 
+            this.dtpDateToFill.CustomFormat = "dd/MM/yyyy";
+            this.dtpDateToFill.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateToFill.Location = new System.Drawing.Point(534, 17);
+            this.dtpDateToFill.Name = "dtpDateToFill";
+            this.dtpDateToFill.Size = new System.Drawing.Size(143, 20);
+            this.dtpDateToFill.TabIndex = 2;
+            // 
+            // btnFillByDate
+            // 
+            this.btnFillByDate.Location = new System.Drawing.Point(694, 9);
+            this.btnFillByDate.Name = "btnFillByDate";
+            this.btnFillByDate.Size = new System.Drawing.Size(99, 31);
+            this.btnFillByDate.TabIndex = 3;
+            this.btnFillByDate.Text = "Tìm kiếm";
+            this.btnFillByDate.UseVisualStyleBackColor = true;
+            this.btnFillByDate.Click += new System.EventHandler(this.btnFillByDate_Click);
+            // 
+            // btnOrderDetails
+            // 
+            this.btnOrderDetails.Location = new System.Drawing.Point(561, 443);
+            this.btnOrderDetails.Name = "btnOrderDetails";
+            this.btnOrderDetails.Size = new System.Drawing.Size(116, 31);
+            this.btnOrderDetails.TabIndex = 4;
+            this.btnOrderDetails.Text = "Chi tiết hóa đơn";
+            this.btnOrderDetails.UseVisualStyleBackColor = true;
+            this.btnOrderDetails.Click += new System.EventHandler(this.btnOrderDetails_Click);
+            // 
+            // btnExportReport
+            // 
+            this.btnExportReport.Location = new System.Drawing.Point(694, 443);
+            this.btnExportReport.Name = "btnExportReport";
+            this.btnExportReport.Size = new System.Drawing.Size(116, 31);
+            this.btnExportReport.TabIndex = 5;
+            this.btnExportReport.Text = "Xuất báo cáo";
+            this.btnExportReport.UseVisualStyleBackColor = true;
+            this.btnExportReport.Click += new System.EventHandler(this.btnExportReport_Click);
+            // 
+            // btnChangeSource
+            // 
+            this.btnChangeSource.Location = new System.Drawing.Point(415, 443);
+            this.btnChangeSource.Name = "btnChangeSource";
+            this.btnChangeSource.Size = new System.Drawing.Size(116, 31);
+            this.btnChangeSource.TabIndex = 6;
+            this.btnChangeSource.Text = "Xem hóa đơn khác";
+            this.btnChangeSource.UseVisualStyleBackColor = true;
+            this.btnChangeSource.Click += new System.EventHandler(this.btnChangeSource_Click);
+            // 
             // OrdId
             // 
             this.OrdId.DataPropertyName = "OrderId";
@@ -99,6 +158,7 @@
             this.CusId.HeaderText = "Mã HV";
             this.CusId.Name = "CusId";
             this.CusId.ReadOnly = true;
+            this.CusId.Visible = false;
             // 
             // CusName
             // 
@@ -113,6 +173,7 @@
             this.TableId.HeaderText = "Mã bàn";
             this.TableId.Name = "TableId";
             this.TableId.ReadOnly = true;
+            this.TableId.Visible = false;
             // 
             // TableName
             // 
@@ -145,7 +206,7 @@
             // PlayTime
             // 
             this.PlayTime.DataPropertyName = "PlayTime";
-            this.PlayTime.HeaderText = "Thời gian chơi";
+            this.PlayTime.HeaderText = "Thời gian chơi(P)";
             this.PlayTime.Name = "PlayTime";
             this.PlayTime.ReadOnly = true;
             // 
@@ -164,58 +225,12 @@
             this.Status.ReadOnly = true;
             this.Status.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(442, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Lọc theo ngày";
-            // 
-            // dtpDateToFill
-            // 
-            this.dtpDateToFill.CustomFormat = "dd/MM/yyyy";
-            this.dtpDateToFill.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateToFill.Location = new System.Drawing.Point(534, 17);
-            this.dtpDateToFill.Name = "dtpDateToFill";
-            this.dtpDateToFill.Size = new System.Drawing.Size(143, 20);
-            this.dtpDateToFill.TabIndex = 2;
-            // 
-            // btnFillByDate
-            // 
-            this.btnFillByDate.Location = new System.Drawing.Point(694, 9);
-            this.btnFillByDate.Name = "btnFillByDate";
-            this.btnFillByDate.Size = new System.Drawing.Size(99, 31);
-            this.btnFillByDate.TabIndex = 3;
-            this.btnFillByDate.Text = "Tìm kiếm";
-            this.btnFillByDate.UseVisualStyleBackColor = true;
-            this.btnFillByDate.Click += new System.EventHandler(this.btnFillByDate_Click);
-            // 
-            // btnOrderDetails
-            // 
-            this.btnOrderDetails.Location = new System.Drawing.Point(578, 443);
-            this.btnOrderDetails.Name = "btnOrderDetails";
-            this.btnOrderDetails.Size = new System.Drawing.Size(99, 31);
-            this.btnOrderDetails.TabIndex = 4;
-            this.btnOrderDetails.Text = "Chi tiết hóa đơn";
-            this.btnOrderDetails.UseVisualStyleBackColor = true;
-            this.btnOrderDetails.Click += new System.EventHandler(this.btnOrderDetails_Click);
-            // 
-            // btnExportReport
-            // 
-            this.btnExportReport.Location = new System.Drawing.Point(694, 443);
-            this.btnExportReport.Name = "btnExportReport";
-            this.btnExportReport.Size = new System.Drawing.Size(99, 31);
-            this.btnExportReport.TabIndex = 5;
-            this.btnExportReport.Text = "Xuất báo cáo";
-            this.btnExportReport.UseVisualStyleBackColor = true;
-            // 
             // frmReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 486);
+            this.Controls.Add(this.btnChangeSource);
             this.Controls.Add(this.btnExportReport);
             this.Controls.Add(this.btnOrderDetails);
             this.Controls.Add(this.btnFillByDate);
@@ -242,6 +257,7 @@
         private System.Windows.Forms.Button btnOrderDetails;
         private System.Windows.Forms.Button btnExportReport;
         private System.Windows.Forms.DataGridView dgvOrderList;
+        private System.Windows.Forms.Button btnChangeSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrdId;
         private System.Windows.Forms.DataGridViewTextBoxColumn CusId;
         private System.Windows.Forms.DataGridViewTextBoxColumn CusName;

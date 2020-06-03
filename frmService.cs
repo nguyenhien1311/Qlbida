@@ -93,14 +93,24 @@ namespace QlBida
             }
             else
             {
-                TableService sv = new TableService();
-                sv.SvName = txtServiceName.Text;
-                sv.Price = Convert.ToDouble(txtServicePrice.Text);
-                sv.Quantity = (int)nmrQuantity.Value;
-                sv.SvCatId = (cbxServiceCategory.SelectedItem as ServiceCategory).SvCatId;
-                db.TableServices.InsertOnSubmit(sv);
-                db.SubmitChanges();
-                LoadService();
+                var svUdt = db.TableServices.SingleOrDefault(x => x.SvName.ToLower().Equals(txtServiceName.Text.ToLower()));
+                if (svUdt == null)
+                {
+                    TableService sv = new TableService();
+                    sv.SvName = txtServiceName.Text;
+                    sv.Price = Convert.ToDouble(txtServicePrice.Text);
+                    sv.Quantity = (int)nmrQuantity.Value;
+                    sv.SvCatId = (cbxServiceCategory.SelectedItem as ServiceCategory).SvCatId;
+                    db.TableServices.InsertOnSubmit(sv);
+                    db.SubmitChanges();
+                    LoadService();
+                }
+                else
+                {
+                    MessageBox.Show("Dịch vụ này đã tồn tại", "Thêm DV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtServiceName.Clear(); txtServiceName.Focus();
+                }
+
             }
 
         }

@@ -46,11 +46,8 @@ namespace QlBida
             }
             o.Price = afterDiscount;
             db.SubmitChanges();
-            this.Close();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
+            frmViewer frm = new frmViewer();
+            frm.Show();
             this.Close();
         }
 

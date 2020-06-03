@@ -12,9 +12,11 @@ namespace QlBida
 {
     public partial class frmHome : Form
     {
+        public Account accInfo { get; set; }
         public frmHome(Account account)
         {
             InitializeComponent();
+            accInfo = account;
             lblName.Text = account.Name;
         }
 
@@ -61,6 +63,7 @@ namespace QlBida
         private void btnAccount_Click(object sender, EventArgs e)
         {
             frmAccount frm = new frmAccount();
+            frm.Acc = accInfo;
             LoadMdiForm(frm);
         }
 

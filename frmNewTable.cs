@@ -30,14 +30,23 @@ namespace QlBida
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            BidaTable tb = new BidaTable();
-            tb.TableName = txtTableName.Text;
-            tb.TableCatID = (cbxTableCat.SelectedItem as TableCategory).TableCatId;
-            tb.Price = Convert.ToDouble(txtPrice.Text);
-            tb.TableStatus = 1;
-            db.BidaTables.InsertOnSubmit(tb);
-            db.SubmitChanges();
-            MessageBox.Show("Them ban thanh cong", "Them ban", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            var table = db.BidaTables.SingleOrDefault(x=>x.TableName.ToLower().Equals(txtTableName.Text.ToLower()));
+            if (table ==null)
+            {
+                BidaTable tb = new BidaTable();
+                tb.TableName = txtTableName.Text;
+                tb.TableCatID = (cbxTableCat.SelectedItem as TableCategory).TableCatId;
+                tb.Price = Convert.ToDouble(txtPrice.Text);
+                tb.TableStatus = 1;
+                db.BidaTables.InsertOnSubmit(tb);
+                db.SubmitChanges();
+                MessageBox.Show("Thêm bàn thành công", "Thêm bàn", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Bàn đã tồn tại", "Thêm bàn", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            }
+            
         }
 
         private void frmNewTable_Load(object sender, EventArgs e)
