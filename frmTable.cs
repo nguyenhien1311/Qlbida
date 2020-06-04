@@ -25,6 +25,9 @@ namespace QlBida
             InitializeComponent();
             bida = new BidaDataContext();
             lstSv = new List<TableService>();
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += timer_Tick;
             btnUpdateTable.Enabled = false;
             btnStartTime.Enabled = false;
             btnEndTime.Enabled = false;
@@ -89,33 +92,34 @@ namespace QlBida
             tb = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
             txtTableName.Text = tb.TableName;
             txtTablePrice.Text = tb.Price.ToString();
-            txtTiming.Text = TimeSpan.FromSeconds(Convert.ToDouble(tb.PlayTime)).ToString();
-            var thisTbOrd = bida.OrderTables.FirstOrDefault(x => x.TableId == tb.TableId);
-            if (thisTbOrd != null)
-                txtSurcharge.Text = thisTbOrd.Surcharge.ToString();
-            else
-                txtSurcharge.Text = "";
+            txtTiming.Text = TimeSpan.FromMinutes(Convert.ToDouble(tb.PlayTime)).ToString();
+            if (tb.StartTime != null)
+            {
+                timer.Start();
+                btnEndTime.Enabled = true;
+            }
+
         }
 
         void LoadOrderOfTb(int id)
         {
-            var thisTbOrd = bida.OrderTables.Where(x => x.TableId == id && x.OrdStatus == 0);
+            var thisTbOrd = bida.OrderTables.SingleOrDefault(x => x.TableId == id && x.OrdStatus == 0);
             if (thisTbOrd != null)
             {
-                foreach (var item in thisTbOrd)
+                order = thisTbOrd;
+                txtSurcharge.Text = thisTbOrd.Surcharge.ToString();
+                var lstDetails = bida.OrdDetails.Where(x => x.OrderId == thisTbOrd.OrderId).ToList();
+                if (lstDetails != null)
                 {
-                    var lstDetails = bida.OrdDetails.Where(x => x.OrderId == item.OrderId).ToList();
-                    if (lstDetails != null)
+                    dgvSerive.Rows.Clear();
+                    foreach (var svitem in lstSv)
                     {
-                        dgvSerive.Rows.Clear();
-                        foreach (var svitem in lstSv)
-                        {
-                            dgvSerive.Rows.Add(new object[] { svitem.SvId, svitem.SvName, svitem.Quantity });
-                        }
+                        dgvSerive.Rows.Add(new object[] { svitem.SvId, svitem.SvName, svitem.Quantity });
                     }
                 }
             }
         }
+
 
         void btn_Click(object sender, EventArgs e)
         {
@@ -148,18 +152,22 @@ namespace QlBida
             {
                 lstSv = frm.services;
             }
-            foreach (var item in lstSv)
+            var thisTbOrd = bida.OrderTables.FirstOrDefault(x => x.TableId == tb.TableId && x.OrdStatus == 0);
+            if (thisTbOrd != null)
             {
-                OrdDetail detail = new OrdDetail()
+                foreach (var item in lstSv)
                 {
-                    OrderId = order.OrderId,
-                    SvId = item.SvId,
-                    Quantity = item.Quantity,
-                    Price = (item.Quantity * item.Price)
-                };
-                bida.OrdDetails.InsertOnSubmit(detail);
+                    OrdDetail detail = new OrdDetail()
+                    {
+                        OrderId = thisTbOrd.OrderId,
+                        SvId = item.SvId,
+                        Quantity = item.Quantity,
+                        Price = (item.Quantity * item.Price)
+                    };
+                    bida.OrdDetails.InsertOnSubmit(detail);
+                }
+                bida.SubmitChanges();
             }
-            bida.SubmitChanges();
         }
 
         private void btnNewTable_Click(object sender, EventArgs e)
@@ -186,9 +194,16 @@ namespace QlBida
         {
             timer.Stop();
             tb.EndTime = DateTime.Now;
-            var ord = bida.OrderTables.SingleOrDefault(x => x.OrderId == order.OrderId);
+            var ord = bida.OrderTables.FirstOrDefault(x => x.OrderId == order.OrderId);
             ord.EndTime = tb.EndTime;
-            ord.PlayTime = tb.PlayTime;
+            if (tb.PlayTime == null)
+            {
+                ord.PlayTime = 1;
+            }
+            else
+            {
+                ord.PlayTime = tb.PlayTime;
+            }
             if (txtSurcharge.Text != "")
             {
 
@@ -218,9 +233,6 @@ namespace QlBida
             btnEndTime.Enabled = true;
             var table = bida.BidaTables.SingleOrDefault(x => x.TableId == id);
             table.StartTime = DateTime.Now;
-            timer = new Timer();
-            timer.Interval = 1000;
-            timer.Tick += timer_Tick;
             timer.Start();
             table.TableStatus = 0;
             bida.SubmitChanges();
@@ -249,11 +261,11 @@ namespace QlBida
                             tb.PlayTime = (int)time.TotalMinutes;
                             bida.SubmitChanges();
                         }
-                        txtTiming.Text = TimeSpan.FromSeconds(time.TotalMinutes).ToString();
+                        txtTiming.Text = TimeSpan.FromMinutes(time.TotalMinutes).ToString();
                     }
                     else
                     {
-                        txtTiming.Text = TimeSpan.FromSeconds(0.0).ToString();
+                        txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
                     }
                 }
                 else
@@ -268,17 +280,17 @@ namespace QlBida
                             tb.PlayTime = (int)time.TotalMinutes;
                             bida.SubmitChanges();
                         }
-                        txtTiming.Text = TimeSpan.FromSeconds(time.TotalMinutes + ptime).ToString();
+                        txtTiming.Text = TimeSpan.FromMinutes(time.TotalMinutes + ptime).ToString();
                     }
                     else
                     {
-                        txtTiming.Text = TimeSpan.FromSeconds(0.0).ToString();
+                        txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
                     }
                 }
             }
             else
             {
-                txtTiming.Text = TimeSpan.FromSeconds(0.0).ToString();
+                txtTiming.Text = TimeSpan.FromMinutes(0.0).ToString();
             }
 
         }

@@ -84,9 +84,12 @@ namespace QlBida
         private void btnLevelUp_Click(object sender, EventArgs e)
         {
             var cus = db.Customers.SingleOrDefault(x => x.CusId == Convert.ToInt32(txtId.Text));
-            cus.CusLevel += 1;
-            db.SubmitChanges();
-            LoadCustomer();
+            if (cus.CusLevel < 3)
+            {
+                cus.CusLevel += 1;
+                db.SubmitChanges();
+                LoadCustomer();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

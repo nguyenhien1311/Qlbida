@@ -44,36 +44,67 @@ namespace QlBida
 
         void LoadInfo()
         {
-            var data = from o in db.OrderTables
-                       join c in db.Customers on o.CusId equals c.CusId
-                       join tb in db.BidaTables on o.TableId equals tb.TableId
-                       select new
-                       {
-                           OrderId = o.OrderId,
-                           CusId = o.CusId,
-                           CusName = c.CusName,
-                           TableId = o.TableId,
-                           TableName = tb.TableName,
-                           StartTime = o.StartTime,
-                           EndTime = o.EndTime,
-                           PlayTime = o.PlayTime,
-                           Surcharge = o.Surcharge,
-                           Price = o.Price,
-                           OrdStatus = o.OrdStatus
-                       };
-            var thisOrd = data.SingleOrDefault(x => x.OrderId == ord.OrderId);
-            if (thisOrd.CusName != null)
+
+            var thisOrd = db.OrderTables.FirstOrDefault(x => x.OrderId == ord.OrderId);
+            if (thisOrd.CusId != null)
             {
-                txtCusName.Text = thisOrd.CusName;
+                var data = from o in db.OrderTables
+                           join c in db.Customers on o.CusId equals c.CusId
+                           join tb in db.BidaTables on o.TableId equals tb.TableId
+                           where o.OrderId == ord.OrderId
+                           select new
+                           {
+                               OrderId = o.OrderId,
+                               CusId = o.CusId,
+                               CusName = c.CusName,
+                               TableId = o.TableId,
+                               TableName = tb.TableName,
+                               StartTime = o.StartTime,
+                               EndTime = o.EndTime,
+                               PlayTime = o.PlayTime,
+                               Surcharge = o.Surcharge,
+                               Price = o.Price,
+                               OrdStatus = o.OrdStatus
+                           };
+                var details = data.SingleOrDefault(x => x.OrderId == ord.OrderId);
+                if (details.CusName != null)
+                {
+                    txtCusName.Text = details.CusName;
+                }
+                else
+                {
+                    txtCusName.Text = "";
+                }
+                txtTableName.Text = details.TableName;
+                txtTotalPrice.Text = details.Price.ToString();
+                txtSurcharge.Text = details.Surcharge.ToString();
+                txtPlayingTime.Text = details.PlayTime.ToString();
             }
-            else
+            else if (thisOrd.CusId == null)
             {
+                var data = from o in db.OrderTables
+                           join tb in db.BidaTables on o.TableId equals tb.TableId
+                           where o.OrderId == ord.OrderId
+                           select new
+                           {
+                               OrderId = o.OrderId,
+                               TableId = o.TableId,
+                               TableName = tb.TableName,
+                               StartTime = o.StartTime,
+                               EndTime = o.EndTime,
+                               PlayTime = o.PlayTime,
+                               Surcharge = o.Surcharge,
+                               Price = o.Price,
+                               OrdStatus = o.OrdStatus
+                           };
+                var details = data.SingleOrDefault(x => x.OrderId == ord.OrderId);
                 txtCusName.Text = "";
+                txtTableName.Text = details.TableName;
+                txtTotalPrice.Text = details.Price.ToString();
+                txtSurcharge.Text = details.Surcharge.ToString();
+                txtPlayingTime.Text = details.PlayTime.ToString();
             }
-            txtTableName.Text = thisOrd.TableName;
-            txtTotalPrice.Text = thisOrd.Price.ToString();
-            txtSurcharge.Text = thisOrd.Surcharge.ToString();
-            txtPlayingTime.Text = thisOrd.PlayTime.ToString();
+
         }
 
     }

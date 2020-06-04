@@ -184,7 +184,7 @@
             // SvId
             // 
             this.SvId.DataPropertyName = "SvId";
-            this.SvId.HeaderText = "Ma DV";
+            this.SvId.HeaderText = "Mã DV";
             this.SvId.Name = "SvId";
             this.SvId.ReadOnly = true;
             // 
@@ -198,14 +198,14 @@
             // Quantity
             // 
             this.Quantity.DataPropertyName = "Quantity";
-            this.Quantity.HeaderText = "So luong";
+            this.Quantity.HeaderText = "Số lượng";
             this.Quantity.Name = "Quantity";
             this.Quantity.ReadOnly = true;
             // 
             // Price
             // 
             this.Price.DataPropertyName = "Price";
-            this.Price.HeaderText = "Gia";
+            this.Price.HeaderText = "Giá";
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;
             // 

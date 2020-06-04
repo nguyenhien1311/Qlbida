@@ -36,6 +36,7 @@ namespace QlBida
                 svCat.SvCatName = name;
                 db.ServiceCategories.InsertOnSubmit(svCat);
                 db.SubmitChanges();
+                MessageBox.Show("Thêm thành công", "Thêm loại DV", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

@@ -50,7 +50,6 @@ namespace QlBida
                 txtUserName.Text = row.Cells[4].Value.ToString();
                 txtPassword.Text = row.Cells[5].Value.ToString();
                 txtAccLevel.Text = row.Cells[6].Value.ToString();
-
                 edit = true;
             }
         }
@@ -108,9 +107,12 @@ namespace QlBida
         private void btnLevelUp_Click(object sender, EventArgs e)
         {
             var acc = db.Accounts.SingleOrDefault(x => x.Id == Convert.ToInt32(txtId.Text));
-            acc.AccLevel += 1;
-            db.SubmitChanges();
-            LoadAccount();
+            if (acc.AccLevel <2)
+            {
+                acc.AccLevel += 1;
+                db.SubmitChanges();
+                LoadAccount();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

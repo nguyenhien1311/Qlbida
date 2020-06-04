@@ -39,7 +39,7 @@ namespace QlBida
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            var thisTbOrd = db.OrderTables.SingleOrDefault(x => x.TableId == tb.TableId);
+            var thisTbOrd = db.OrderTables.FirstOrDefault(x => x.TableId == tb.TableId);
             if (thisTbOrd != null)
             {
                 int id = (cbxTable.SelectedItem as BidaTable).TableId;
@@ -55,9 +55,10 @@ namespace QlBida
                 table.StartTime = null;
                 table.TableStatus = 1;
                 db.SubmitChanges();
+                MessageBox.Show("Đã chuyển bàn","Chuyển bàn",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -13,21 +13,24 @@ namespace QlBida
     public partial class frmReport : Form
     {
         private BidaDataContext db;
-        private bool hasCus = true;
+        private bool hasCus;
         public frmReport()
         {
-            InitializeComponent();
+            InitializeComponent(); hasCus = true;
             db = new BidaDataContext();
             btnOrderDetails.Enabled = false;
         }
 
         private void btnOrderDetails_Click(object sender, EventArgs e)
         {
-            var row = dgvOrderList.CurrentRow;
-            int id = (int)row.Cells[0].Value;
-            var order = db.OrderTables.SingleOrDefault(x => x.OrderId == id);
-            frmOrderDetails frm = new frmOrderDetails(order);
-            frm.Show();
+            if (dgvOrderList.CurrentRow!= null)
+            {
+                var row = dgvOrderList.CurrentRow;
+                int id = (int)row.Cells[0].Value;
+                var order = db.OrderTables.SingleOrDefault(x => x.OrderId == id);
+                frmOrderDetails frm = new frmOrderDetails(order);
+                frm.Show();
+            }
         }
 
         private void frmReport_Load(object sender, EventArgs e)
@@ -37,7 +40,8 @@ namespace QlBida
 
         private void LoadOrder()
         {
-            if (hasCus == true)
+            dgvOrderList.Rows.Clear();
+            if (hasCus)
             {
                 var data = from o in db.OrderTables
                            join c in db.Customers on o.CusId equals c.CusId
@@ -59,7 +63,7 @@ namespace QlBida
                            };
                 dgvOrderList.DataSource = data;
             }
-            else
+            else if (!hasCus)
             {
                 var data = from o in db.OrderTables
                            join tb in db.BidaTables on o.TableId equals tb.TableId
@@ -104,7 +108,7 @@ namespace QlBida
                                };
                 dgvOrderList.DataSource = lstOrder;
             }
-            else
+            else if (!hasCus)
             {
                 var lstOrder = from o in db.OrderTables
                                join tb in db.BidaTables on o.TableId equals tb.TableId

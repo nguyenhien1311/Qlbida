@@ -46,8 +46,7 @@ namespace QlBida
             }
             o.Price = afterDiscount;
             db.SubmitChanges();
-            frmViewer frm = new frmViewer();
-            frm.Show();
+            MessageBox.Show("Thanh toán thành công","Thanh toán",MessageBoxButtons.OK,MessageBoxIcon.Information);
             this.Close();
         }
 
@@ -61,7 +60,15 @@ namespace QlBida
         {
             var order = db.OrderTables.SingleOrDefault(x=>x.OrderId == ord.OrderId);
             tb = db.BidaTables.SingleOrDefault(x => x.TableId == ord.TableId);
-            time = (double)(order.PlayTime / 60);
+            if (tb.PlayTime  == null)
+            {
+                time = 1;
+            }
+            else
+            {
+                time = (double)(order.PlayTime / 60);
+            }
+            
             price = time * (double)tb.Price;
             if (cus != null)
             {
